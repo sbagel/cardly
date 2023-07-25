@@ -75,4 +75,19 @@ class UserDaoDBTest {
         updated = userDao.getUserByID(user.getId());
         assertEquals(user, updated);
     }
+
+    @Test
+    public void testDeleteUserByID(){
+        User user = new User();
+        user.setUsername("sbagel");
+        user.setName("Sophia Bagel");
+        user.setPhoto("url");
+        user = userDao.addUser(user);
+
+        boolean isDeleted = userDao.deleteUserByID(user.getId());
+        assertTrue(isDeleted);
+
+        User deleted = userDao.getUserByID(user.getId());
+        assertNull(deleted);
+    }
 }
