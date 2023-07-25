@@ -1,7 +1,6 @@
 package com.sz.cardly.dao;
 
-import com.sz.cardly.entities.Folder;
-import com.sz.cardly.entities.User;
+import com.sz.cardly.entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class FolderDaoDBTest {
-
     @Autowired
     FolderDao folderDao;
-
+    @Autowired
+    UserResponseDao userResponseDao;
+    @Autowired
+    SessionDao sessionDao;
+    @Autowired
+    CardDao cardDao;
+    @Autowired
+    DeckDao deckDao;
     @Autowired
     UserDao userDao;
 
@@ -25,9 +30,24 @@ class FolderDaoDBTest {
 
     @BeforeEach
     void setUp() {
-        List<Folder> folders = folderDao.getAllFolders();
-        folders.forEach(folder -> {
-            folderDao.deleteFolderByID(folder.getId());
+        List<UserResponse> userResponses = userResponseDao.getAllUserResponses();
+        userResponses.forEach(userResponse -> {
+            userResponseDao.deleteUserResponseByID(userResponse.getId());
+        });
+
+        List<Session> sessions = sessionDao.getAllSessions();
+        sessions.forEach(session -> {
+            sessionDao.deleteSessionByID(session.getId());
+        });
+
+        List<Card> cards = cardDao.getAllCards();
+        cards.forEach(card -> {
+            cardDao.deleteCardById(card.getId());
+        });
+
+        List<Deck> decks = deckDao.getAllDecks();
+        decks.forEach(deck -> {
+            deckDao.deleteDeckByID(deck.getId());
         });
 
         List<User> users = userDao.getAllUsers();

@@ -1,8 +1,6 @@
 package com.sz.cardly.dao;
 
-import com.sz.cardly.entities.Card;
-import com.sz.cardly.entities.Deck;
-import com.sz.cardly.entities.User;
+import com.sz.cardly.entities.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class CardDaoDBTest {
 
+    @Autowired
+    FolderDao folderDao;
+    @Autowired
+    UserResponseDao userResponseDao;
+    @Autowired
+    SessionDao sessionDao;
     @Autowired
     CardDao cardDao;
     @Autowired
@@ -30,6 +34,16 @@ class CardDaoDBTest {
 
     @BeforeEach
     void setUp() {
+        List<UserResponse> userResponses = userResponseDao.getAllUserResponses();
+        userResponses.forEach(userResponse -> {
+            userResponseDao.deleteUserResponseByID(userResponse.getId());
+        });
+
+        List<Session> sessions = sessionDao.getAllSessions();
+        sessions.forEach(session -> {
+            sessionDao.deleteSessionByID(session.getId());
+        });
+
         List<Card> cards = cardDao.getAllCards();
         cards.forEach(card -> {
             cardDao.deleteCardById(card.getId());

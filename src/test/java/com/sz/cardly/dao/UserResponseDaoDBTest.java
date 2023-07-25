@@ -34,6 +34,7 @@ class UserResponseDaoDBTest {
         userResponses.forEach(userResponse -> {
             userResponseDao.deleteUserResponseByID(userResponse.getId());
         });
+
         List<Session> sessions = sessionDao.getAllSessions();
         sessions.forEach(session -> {
             sessionDao.deleteSessionByID(session.getId());
