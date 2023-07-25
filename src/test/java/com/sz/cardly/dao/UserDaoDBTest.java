@@ -35,4 +35,25 @@ class UserDaoDBTest {
         User added = userDao.getUserByID(user.getId());
         assertEquals(user, added);
     }
+
+    @Test
+    public void testGetAllUsers(){
+        User user1 = new User();
+        user1.setUsername("sbagel");
+        user1.setName("Sophia Bagel");
+        user1.setPhoto("url");
+        user1 = userDao.addUser(user1);
+
+        User user2 = new User();
+        user2.setUsername("bagels");
+        user2.setName("Bagel Sophia");
+        user2.setPhoto("url");
+        user2 = userDao.addUser(user2);
+
+        List<User> users = userDao.getAllUsers();
+
+        assertEquals(2, users.size());
+        assertTrue(users.contains(user1));
+        assertTrue(users.contains(user2));
+    }
 }
