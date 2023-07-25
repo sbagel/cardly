@@ -42,7 +42,7 @@ public class CardDaoDB implements CardDao{
                 card.getCreationDate(),
                 card.isFavorited());
 
-        int id = jdbc.queryForObject("SELECT LAST INSERT_ID()", Integer.class);
+        int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         card.setId(id);
         return card;
     }

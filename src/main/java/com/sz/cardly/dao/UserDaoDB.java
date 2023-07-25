@@ -39,7 +39,7 @@ public class UserDaoDB implements UserDao{
                 user.getName(),
                 user.getPhoto());
 
-        int id = jdbc.queryForObject("SELECT LAST INSERT_ID()", Integer.class);
+        int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         user.setId(id);
         return user;
     }
