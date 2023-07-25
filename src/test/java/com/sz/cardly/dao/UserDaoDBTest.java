@@ -56,4 +56,23 @@ class UserDaoDBTest {
         assertTrue(users.contains(user1));
         assertTrue(users.contains(user2));
     }
+
+    @Test
+    public void testUpdateUser(){
+        User user = new User();
+        user.setUsername("sbagel");
+        user.setName("Sophia Bagel");
+        user.setPhoto("url");
+        user = userDao.addUser(user);
+
+        User updated = userDao.getUserByID(user.getId());
+        assertEquals(user, updated);
+
+        user.setName("Soph Bagel");
+        userDao.updateUser(user);
+        assertNotEquals(user, updated);
+
+        updated = userDao.getUserByID(user.getId());
+        assertEquals(user, updated);
+    }
 }
