@@ -52,12 +52,14 @@ public class UserResponseDaoDB implements UserResponseDao {
                 "SessionID = ?, " +
                 "CardID = ?, " +
                 "UserAnswerText = ?, " +
-                "Score = ?";
+                "Score = ? "
+                +"WHERE ResponseID = ?";
         return jdbc.update(sql,
                 userResponse.getSessionID(),
                 userResponse.getCardID(),
                 userResponse.getUserAnswerText(),
-                userResponse.getScore()) == 1;
+                userResponse.getScore(),
+                userResponse.getId()) == 1;
     }
 
     @Override

@@ -53,13 +53,15 @@ public class FolderDaoDB implements FolderDao {
                 "FolderName = ?, " +
                 "CreationDate = ?, " +
                 "LastViewDate = ?, " +
-                "isBookmarked = ?";
+                "isBookmarked = ? "
+                +"WHERE FolderID = ?";
         return jdbc.update(sql,
                 folder.getUserID(),
                 folder.getFolderName(),
                 folder.getCreationDate(),
                 folder.getLastViewDate(),
-                folder.isBookmarked()) == 1;
+                folder.isBookmarked(),
+                folder.getId()) == 1;
     }
 
     @Override

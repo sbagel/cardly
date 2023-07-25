@@ -54,13 +54,15 @@ public class CardDaoDB implements CardDao{
                 +"FrontCard = ?, "
                 +"BackCard = ?, "
                 +"CreationDate = ?,"
-                +"isFavorited = ?";
+                +"isFavorited = ? "
+                +"WHERE CardID = ?";
         return jdbc.update(sql,
                 card.getDeckId(),
                 card.getFront(),
                 card.getBack(),
                 card.getCreationDate(),
-                card.isFavorited()) == 1;
+                card.isFavorited(),
+                card.getId()) == 1;
     }
 
     @Override

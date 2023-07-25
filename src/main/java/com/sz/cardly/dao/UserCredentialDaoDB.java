@@ -47,10 +47,12 @@ public class UserCredentialDaoDB implements UserCredentialDao{
     public boolean updateUserCredential(UserCredential userCredential) {
         final String sql = "UPDATE UserCredential SET "
                 +"Email = ?, "
-                +"PasswordHash = ?";
+                +"PasswordHash = ? "
+                +"WHERE UserID = ?";
         return jdbc.update(sql,
                 userCredential.getEmail(),
-                userCredential.getPasswordHash()) == 1;
+                userCredential.getPasswordHash(),
+                userCredential.getId()) == 1;
     }
 
     @Override

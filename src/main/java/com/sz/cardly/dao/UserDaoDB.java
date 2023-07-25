@@ -49,11 +49,13 @@ public class UserDaoDB implements UserDao{
         final String sql = "UPDATE User SET "
                 +"Username = ?, "
                 +"Name = ?, "
-                +"Photo = ?";
+                +"Photo = ? "
+                +"WHERE UserID = ?";
         return jdbc.update(sql,
                 user.getUsername(),
                 user.getName(),
-                user.getPhoto()) == 1;
+                user.getPhoto(),
+                user.getId()) == 1;
     }
 
     @Override

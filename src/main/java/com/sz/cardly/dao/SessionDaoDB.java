@@ -48,11 +48,13 @@ public class SessionDaoDB implements SessionDao{
         final String sql = "UPDATE Session SET " +
                 "UserID = ?, " +
                 "Date = ?, " +
-                "DeckID = ?";
+                "DeckID = ? "
+                +"WHERE SessionID = ?";
         return jdbc.update(sql,
                 session.getUserID(),
                 session.getDate(),
-                session.getDeckID()) == 1;
+                session.getDeckID(),
+                session.getId()) == 1;
     }
 
     @Override

@@ -54,14 +54,16 @@ public class DeckDaoDB implements DeckDao{
                 "Description = ?, " +
                 "CreationDate = ?, " +
                 "LastViewDate = ?, " +
-                "isVisible = ?";
+                "isVisible = ? "
+                +"WHERE DeckID = ?";
         return jdbc.update(sql,
                 deck.getUserID(),
                 deck.getTitle(),
                 deck.getDescription(),
                 deck.getCreationDate(),
                 deck.getLastViewDate(),
-                deck.isVisible()) == 1;
+                deck.isVisible(),
+                deck.getId()) == 1;
     }
 
     @Override
