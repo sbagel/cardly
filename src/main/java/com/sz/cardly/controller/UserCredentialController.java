@@ -24,7 +24,6 @@ public class UserCredentialController {
 
     @PostMapping("/add")
     public UserCredential addUser(@RequestBody UserCredential user){
-        System.out.print(user);
         return userCredentialService.addUserCredential(user);
     }
 
