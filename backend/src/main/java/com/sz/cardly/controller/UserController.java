@@ -29,7 +29,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public boolean updateUser(@RequestBody User user){
+    public boolean updateUser(@PathVariable("id") int id,@RequestBody User user){
+        User original = userService.getUserByID(id);
+        user.setId(id);
         return userService.updateUser(user);
     }
 
