@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import ToggleHeader from '../components/ToggleHeader';
-import QuickAdd from '../components/QuickAdd';
+import QuickAdd from '../components/quick_add/QuickAdd';
 
 export default function Test2() {
 

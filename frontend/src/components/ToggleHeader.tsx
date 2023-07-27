@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   toggleLink: {
-    fontSize: rem(18),
+    fontSize: rem(20),
     color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[9],
     margin: '0 5% 0 0',
     fontWeight: 500,
@@ -68,7 +68,7 @@ export default function ToggleHeader({ toggleLinks }: ToggleHeaderProps) {
   ));
 
   return (
-    <Container className={classes.inner}>
+    <Container className={classes.inner} mb={40}>
       <div className={classes.links}>
         <Group spacing={0} className={classes.toggleLinks}>
           {toggleItems}
