@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { createStyles, Divider, Container, Anchor, Group, Burger, rem } from '@mantine/core';
 import { useInputState } from '@mantine/hooks';
+import useAutosizeTextArea from "../hooks/useAutosizeTextArea";
 
 const CONTAINER_HEIGHT = rem(814);
 
@@ -53,6 +55,11 @@ export default function QuickAdd() {
   const { classes } = useStyles();
   const [termValue, setTermValue] = useInputState('Enter term');
   const [definitionValue, setDefinitionValue] = useInputState('Enter definition');
+  const termAreaRef = useRef<HTMLTextAreaElement>(null);
+  const definitionAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  useAutosizeTextArea(termAreaRef.current, termValue);
+  useAutosizeTextArea(definitionAreaRef.current, definitionValue);
 
   return (
     <Container className={classes.inner}>
@@ -61,9 +68,9 @@ export default function QuickAdd() {
           hi
         </div>
         <div className={classes.folderBottom}>
-          <textarea placeholder={termValue} onChange={setTermValue} className={classes.inputBox}></textarea>
+          <textarea ref={termAreaRef} placeholder={termValue} onChange={setTermValue} className={classes.inputBox}></textarea>
             <Divider style={{width:'90%'}} color="gray.2" my="xs" />
-          <textarea placeholder={definitionValue} onChange={setDefinitionValue} className={classes.inputBox}></textarea>
+          <textarea ref={definitionAreaRef} placeholder={definitionValue} onChange={setDefinitionValue} className={classes.inputBox}></textarea>
         </div>
       </div>
     </Container>
