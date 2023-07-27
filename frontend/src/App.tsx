@@ -27,7 +27,7 @@ function App() {
           // colorScheme: systemScheme,
           fontFamily: "Roboto, sans-serif",
           colors: {
-            ['gray']: ['#F2F2F2', '#f6f6f6', '#d9d9d9', '#ADADAD', '#969696', '#808080', '#666666', '#4D4D4D', '#333333', '#1A1A1A']
+            ['gray']: ['#F2F2F2', '#DBDBDB', '#C4C4C4', '#ADADAD', '#969696', '#808080', '#666666', '#4D4D4D', '#333333', '#1A1A1A']
           }
         }}>
         <RouterProvider router={router}/>
