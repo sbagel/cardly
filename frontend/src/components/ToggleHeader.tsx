@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Header, Container, Anchor, Group, Burger, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { createStyles, Container, Anchor, Group, rem } from '@mantine/core';
 
 const HEADER_HEIGHT = rem(84);
 
@@ -52,7 +51,6 @@ interface ToggleHeaderProps {
 }
 
 export default function ToggleHeader({ toggleLinks }: ToggleHeaderProps) {
-  const [opened, { toggle }] = useDisclosure(false);
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(0);
 
@@ -61,8 +59,7 @@ export default function ToggleHeader({ toggleLinks }: ToggleHeaderProps) {
       href={item.link}
       key={item.label}
       className={cx(classes.toggleLink, { [classes.toggleLinkActive]: index === active })}
-      onClick={(event) => {
-        // event.preventDefault();
+      onClick={() => {
         setActive(index);
       }}
     >

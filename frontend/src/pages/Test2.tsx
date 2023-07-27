@@ -1,27 +1,8 @@
-import { Text, Button } from '@mantine/core';
 import Header from '../components/Header';
 import ToggleHeader from '../components/ToggleHeader';
+import QuickAdd from '../components/QuickAdd';
 
-function Test2() {
-
-  const mainLinks = [
-    {
-      "link": "#",
-      "label": "<FaBeer/>"
-    },
-    {
-      "link": "#",
-      "label": "Documentation"
-    },
-    {
-      "link": "#",
-      "label": "Community"
-    },
-    {
-      "link": "#",
-      "label": "Academy"
-    }
-  ]
+export default function Test2() {
 
   const toggleLinks = [
     {
@@ -40,10 +21,9 @@ function Test2() {
 
   return (
     <div className="Test2">
-      <Header mainLinks={mainLinks}/>
+      <Header/>
       <ToggleHeader toggleLinks={toggleLinks}/>
+      <QuickAdd/>
     </div>
   )
 }
-
-export default Test2
