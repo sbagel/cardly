@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { createStyles, Divider, Container, rem , Modal} from '@mantine/core';
+import { createStyles, Divider, Container, rem} from '@mantine/core';
 import { useInputState, useDisclosure } from '@mantine/hooks';
 import useAutosizeTextArea from "../../hooks/useAutosizeTextArea";
 import { FaAngleDown } from 'react-icons/fa';
@@ -81,7 +81,7 @@ export default function QuickAdd() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const [deckName, setDeckName] = useInputState('My First Deck');
+  const deckName = 'My First Deck';
   const [termValue, setTermValue] = useInputState('Enter term');
   const [definitionValue, setDefinitionValue] = useInputState('Enter definition');
 
