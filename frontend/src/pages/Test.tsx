@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { Outlet, Link } from 'react-router-dom';
+import useUsersFacade from '../app/useUsersFacade';
+
 
 function Test() {
+
+  const { users, loading, error, fetchUsers } = useUsersFacade();
+
+  // useEffect(() => fetchUsers(), []);
+
+  console.log('hi',users)
 
   return (
     <>
