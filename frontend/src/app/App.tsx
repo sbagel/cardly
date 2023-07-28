@@ -1,9 +1,9 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
-import Test from "../pages/Test";
-import Test2 from "../pages/Test2";
-import NotFound from "../pages/NotFound";
+import Test from "./pages/Test";
+import Test2 from "./pages/Test2";
+import NotFound from "./pages/NotFound";
 import './index.css';
 
 const router = createBrowserRouter(

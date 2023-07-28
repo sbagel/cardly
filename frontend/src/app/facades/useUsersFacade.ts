@@ -1,4 +1,5 @@
-import { useUsersStore } from "./useUsersStore"
+import useUsersStore from "../../stores/useUsersStore"
+
 import { shallow } from "zustand/shallow"
 
 const useUsersFacade = () => {

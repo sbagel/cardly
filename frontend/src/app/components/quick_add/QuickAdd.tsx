@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { createStyles, Divider, Container, rem} from '@mantine/core';
 import { useInputState, useDisclosure } from '@mantine/hooks';
-import useAutosizeTextArea from "../../hooks/useAutosizeTextArea";
+import useAutosizeTextArea from "../../../hooks/useAutosizeTextArea";
 import { FaAngleDown } from 'react-icons/fa';
 import DeckModal from "./DeckModal";
 
@@ -90,6 +90,8 @@ export default function QuickAdd() {
 
   useAutosizeTextArea(termAreaRef.current, termValue);
   useAutosizeTextArea(definitionAreaRef.current, definitionValue);
+
+
 
   return (
     <Container className={classes.inner}>
