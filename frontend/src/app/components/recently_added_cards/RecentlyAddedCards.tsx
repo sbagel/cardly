@@ -25,7 +25,7 @@ export default function RecentlyAddedCards({cards, state, toggle}:RecentlyAddedP
       {state.error && <p>{state.error}</p>}
       {cards?.length > 0 && (
         cards.map((card, index: number) => (
-          <Card card={card} key={`key-${index}`} toggle={toggle} />
+          <Card card={card} key={`key-${card.id}`} toggle={toggle} />
         ))
       )}
     </Container>
