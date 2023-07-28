@@ -3,9 +3,9 @@ import useUsersStore from "../../stores/useUsersStore"
 import { shallow } from "zustand/shallow"
 
 const useUsersFacade = () => {
-  const { users, loading, error, fetchUsers } = useUsersStore(
+  const { user, loading, error, fetchUsers } = useUsersStore(
     (state) => ({
-      users: state.users,
+      user: state.user,
       loading: state.loading,
       error: state.error,
       fetchUsers: state.fetchUsers,
@@ -13,7 +13,7 @@ const useUsersFacade = () => {
     shallow
   )
 
-  return { users, loading, error, fetchUsers }
+  return { user, loading, error, fetchUsers }
 }
 
 export default useUsersFacade

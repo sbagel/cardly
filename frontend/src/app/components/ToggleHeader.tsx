@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createStyles, Container, Anchor, Group, rem } from '@mantine/core';
 
-const HEADER_HEIGHT = rem(84);
+const HEADER_HEIGHT = rem(100);
 
 const useStyles = createStyles((theme) => ({
   inner: {

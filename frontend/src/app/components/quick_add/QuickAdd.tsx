@@ -5,11 +5,9 @@ import useAutosizeTextArea from "../../../hooks/useAutosizeTextArea";
 import { FaAngleDown } from 'react-icons/fa';
 import DeckModal from "./DeckModal";
 
-const CONTAINER_HEIGHT = rem(814);
-
 const useStyles = createStyles((theme) => ({
   inner: {
-    height: CONTAINER_HEIGHT,
+    height: 'fit',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -17,11 +15,7 @@ const useStyles = createStyles((theme) => ({
   },
   folder: {
     height: '100%',
-    width: '80%',
-
-    [theme.fn.smallerThan('sm')]: {
-      width: '100%',
-    }
+    width: '100%',
   },
   folderTop: {
     display: 'flex',
@@ -33,12 +27,12 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    border: `${rem(2)} solid black`,
+    border: `${rem(3)} solid black`,
     borderRadius: '0 20px 0 20px',
     padding: `${rem(20)} ${theme.spacing.sm}`,
   },
   inputBox: {
-    width: '90%',
+    width: '96%',
     height: `${rem(102)}`,
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
@@ -51,18 +45,23 @@ const useStyles = createStyles((theme) => ({
 
     '&:focus': {
       outlineColor: theme.colors.gray[2]
+    },
+
+    '&::placeholder': {
+      fontSize: rem(20),
+      fontWeight: 500,
     }
   },
   folderLabel: {
     padding: `${rem(7)} ${theme.spacing.sm}`,
-    border: `${rem(2)} dashed black`,
+    border: `${rem(3)} dashed black`,
     borderBottom: 0,
     borderRadius: '12px 12px 0 0',
     cursor: 'pointer'
   },
   deckLabel: {
     padding: `${rem(7)} ${theme.spacing.sm}`,
-    border: `${rem(2)} solid black`,
+    border: `${rem(3)} solid black`,
     borderBottom: 0,
     borderRadius: '12px 12px 0 0',
     zIndex: 10,
@@ -94,7 +93,7 @@ export default function QuickAdd() {
 
 
   return (
-    <Container className={classes.inner}>
+    <Container className={classes.inner} mb={60}>
       <DeckModal opened={opened} close={close}/>
       <div className={classes.folder}>
         <div className={classes.folderTop}>
@@ -107,7 +106,7 @@ export default function QuickAdd() {
         </div>
         <div className={classes.folderBottom}>
           <textarea ref={termAreaRef} placeholder={termValue} onChange={setTermValue} className={classes.inputBox}></textarea>
-            <Divider style={{width:'90%'}} color="gray.2" my="xs" />
+            <Divider style={{width:'96%'}} color="gray.2" my="xs" />
           <textarea ref={definitionAreaRef} placeholder={definitionValue} onChange={setDefinitionValue} className={classes.inputBox}></textarea>
         </div>
       </div>

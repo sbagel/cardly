@@ -2,7 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
 import Test from "./pages/Test";
-import Test2 from "./pages/Test2";
+import Add from "./pages/Add";
 import NotFound from "./pages/NotFound";
 import './index.css';
 
@@ -10,7 +10,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route index element={<Test />} />
-      <Route path="test2" element={<Test2 />} />
+      <Route path="add" element={<Add />} />
       <Route path='*' element={<NotFound />}/>
     </Route>
   )
