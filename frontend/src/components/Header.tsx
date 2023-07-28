@@ -22,7 +22,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   logo: {
-    fontWeight: 700
+    fontWeight: 700,
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
   },
 
   burger: {
@@ -96,7 +97,7 @@ export default function DoubleHeader() {
   return (
     <Header height={HEADER_HEIGHT} mb={20}>
       <Container className={classes.inner}>
-        <h1 className={classes.logo}>Cardly</h1>
+        <a href='/'><h1 className={classes.logo}>Cardly</h1></a>
         <div className={classes.links}>
           <Group spacing={0} position="right" className={classes.mainLinks}>
             <ItemTemplate icon={<FaPlus/>} url="#" label="bleh"/>
