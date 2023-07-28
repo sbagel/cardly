@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CardService {
     Card getCardById(int id);
-    List<Card> getAllCards();
+    List<Card> getAllCardsByDeckId(int deckId);
     Card addCard(Card card);
     boolean updateCard(Card card);
     boolean deleteCardById(int id);

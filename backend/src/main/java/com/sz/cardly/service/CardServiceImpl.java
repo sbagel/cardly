@@ -18,8 +18,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> getAllCards() {
-        return cardDao.getAllCards();
+    public List<Card> getAllCardsByDeckId(int deckId) {
+        return cardDao.getAllCardsByDeckId(deckId);
     }
 
     @Override

@@ -25,6 +25,13 @@ public class CardDaoDB implements CardDao{
     }
 
     @Override
+    public List<Card> getAllCardsByDeckId(int deckId) {
+        final String sql = "SELECT * FROM card WHERE deckId = ?";
+
+        return jdbc.query(sql, new CardMapper(), deckId);
+    }
+
+    @Override
     public List<Card> getAllCards() {
         final String sql = "SELECT * FROM card";
 

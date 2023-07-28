@@ -15,8 +15,8 @@ public class CardController {
     CardService cardService;
 
     @GetMapping("/all")
-    public List<Card> getAllCards() {
-        return cardService.getAllCards();
+    public List<Card> getAllCardsByDeckId(@RequestParam("deckId") int deckId) {
+        return cardService.getAllCardsByDeckId(deckId);
     }
 
     @GetMapping("/{id}")

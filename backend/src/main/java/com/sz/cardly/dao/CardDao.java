@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface CardDao {
     Card getCardById(int id);
+    List<Card> getAllCardsByDeckId(int deckId);
     List<Card> getAllCards();
     Card addCard(Card card);
     boolean updateCard(Card card);
