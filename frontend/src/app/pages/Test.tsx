@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, Link } from 'react-router-dom';
 import useUsersFacade from "../facades/useUsersFacade";
-import Demo from "../components/Demo";
 
 function Test() {
 
@@ -17,7 +16,6 @@ function Test() {
   return (
     <>
 
-    <Demo/>
     <br></br>
     <br></br>
     <br></br>
