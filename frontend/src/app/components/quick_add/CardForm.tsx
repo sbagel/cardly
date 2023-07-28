@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import { createStyles, Divider, rem} from '@mantine/core';
-import { useInputState, } from '@mantine/hooks';
-import useCardsFacade from '../../facades/useCardsFacade';
+import { useForm } from '@mantine/form';
+import { Button, createStyles, Divider, rem, Textarea } from '@mantine/core';
 import useAutosizeTextArea from "../../../hooks/useAutosizeTextArea";
+import useCardsFacade from "../../facades/useCardsFacade";
 
 const useStyles = createStyles((theme) => ({
   folderBottom: {
@@ -16,7 +16,6 @@ const useStyles = createStyles((theme) => ({
   },
   inputBox: {
     width: '96%',
-    height: `${rem(102)}`,
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0],
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     padding: `${rem(20)} ${theme.spacing.sm}`,
@@ -25,64 +24,51 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '20px',
     overflowWrap: 'break-word',
     resize: 'vertical',
-
-    '&:focus': {
-      outlineColor: theme.colors.gray[2]
-    },
-
-    '&::placeholder': {
-      fontSize: rem(20),
-      fontWeight: 500,
-    }
   },
+  btn: {
+    visibility: 'hidden',
+    height:0,
+  }
 }));
 
-// interface CardFormProps {
-// }
 
-export default function CardForm() {
+export default function Demo() {
   const { addCard } = useCardsFacade();
 
   const { classes } = useStyles();
 
-  const [termValue, setTermValue] = useInputState('Enter term');
-  const [definitionValue, setDefinitionValue] = useInputState('Enter definition');
+  const form = useForm({
+    initialValues: { id: 0, deckId: 2, front: '', back: '', favorited: false},
 
+    validate: {
+      front: (value) => (value.split(" ").length < 2 ? 'Card term must have at least 2 words' : null),
+      back: (value) => (value.length < 1 ? 'Card defintion is empty' : null),
+    },
+  });
+
+  const btnRef = useRef<HTMLButtonElement>(null);
   const termAreaRef = useRef<HTMLTextAreaElement>(null);
   const definitionAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  useAutosizeTextArea(termAreaRef.current, termValue);
-  useAutosizeTextArea(definitionAreaRef.current, definitionValue);
-
-  const handleSubmitCard: React.FormEventHandler<HTMLFormElement> = () => {
-    const newCard = {
-      id: 0,
-      deckId: 2,
-      front: termValue,
-      back: definitionValue,
-      favorited: false
-    }
-
-    addCard(newCard)
-      .then(() => {
-        console.log('card added', newCard)
-      })
-      .catch((error) => {
-        console.log('error adding card', error)
-      })
-  }
+  useAutosizeTextArea(termAreaRef.current, form.values.front);
+  useAutosizeTextArea(definitionAreaRef.current, form.values.back);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
-      handleSubmitCard(event);
+      event.preventDefault();
+      btnRef.current?.click();
     }
   };
 
   return (
-    <form onSubmit={handleSubmitCard} onKeyDown={handleKeyDown} className={classes.folderBottom}>
-      <textarea ref={termAreaRef} placeholder={termValue} onChange={setTermValue} className={classes.inputBox}></textarea>
+    <form onSubmit={form.onSubmit(addCard)} className={classes.folderBottom} onKeyDown={handleKeyDown}>
+      <Textarea ref={termAreaRef} placeholder="Enter Term" className={classes.inputBox} variant="unstyled" {...form.getInputProps('front')} styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
+
         <Divider style={{width:'96%'}} color="gray.2" my="xs" />
-      <textarea ref={definitionAreaRef} placeholder={definitionValue} onChange={setDefinitionValue} className={classes.inputBox}></textarea>
+
+      <Textarea ref={definitionAreaRef} placeholder="Enter Definition" className={classes.inputBox} variant="unstyled" {...form.getInputProps('back')} styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
+
+      <Button ref={btnRef} type="submit" mt="sm" className={classes.btn}></Button>
     </form>
-  )
+  );
 }

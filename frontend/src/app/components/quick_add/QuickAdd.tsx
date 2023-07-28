@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { FaAngleDown } from 'react-icons/fa';
 import DeckModal from "./DeckModal";
 import CardForm from "./CardForm";
-import Demo from '../Demo';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -68,8 +67,7 @@ export default function QuickAdd() {
             {deckName}&nbsp;<FaAngleDown/>
           </div>
         </div>
-        <Demo/>
-        {/* <CardForm/> */}
+        <CardForm/>
         {/* <div>
           <button>enter</button>
         </div> */}
