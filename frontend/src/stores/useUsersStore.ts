@@ -1,23 +1,7 @@
 import { create } from "zustand";
+import { User, UsersState } from "../types/UserTypes"
 
 const API_URL = "http://localhost:8080/api/user";
-
-interface User {
-  id: number;
-  username: string;
-  name: string;
-  photo: string;
-}
-
-export interface UsersState {
-  user: User;
-  loading: boolean;
-  error: string;
-  fetchUsers: (id: number) => Promise<void>;
-  addUser: (user: User) => Promise<void>;
-  updateUser: (user: User) => Promise<void>;
-  deleteUser: (id: number) => Promise<void>;
-}
 
 const useUsersStore = create<UsersState>((set) => ({
   user: {

@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import useCardsStore from "../../stores/useCardsStore";
+import { CardsState } from "../../types/CardTypes";
 import { shallow } from "zustand/shallow";
 
 const useCardsFacade = () => {
@@ -15,6 +17,16 @@ const useCardsFacade = () => {
       }),
       shallow
     );
+
+  useEffect(() => {
+    const unsubscribe = useCardsStore.subscribe((newState: CardsState) => {
+      console.log("New cards:", newState.cards);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return { cards, loading, error, fetchCards, addCard, updateCard, deleteCard };
 };
