@@ -3,6 +3,7 @@ import { useInputState, useDisclosure, useHover } from '@mantine/hooks';
 import { Card as CardType } from "../../../types/CardTypes";
 import useCardsFacade from '../../facades/useCardsFacade';
 import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
+import { SetStateAction } from 'react';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -47,10 +48,10 @@ const useStyles = createStyles((theme) => ({
 
 interface CardProps {
   card: CardType;
-  setUpdate: [boolean, { open: () => void; close: () => void; toggle: () => void; }];
+  toggle: (value?: SetStateAction<boolean> | undefined) => void;
 }
 
-export default function Card({ card, setUpdate }: CardProps) {
+export default function Card({ card, toggle }: CardProps) {
   const { deleteCard } = useCardsFacade();
 
   const { classes } = useStyles();
@@ -62,7 +63,7 @@ export default function Card({ card, setUpdate }: CardProps) {
 
   const handleDeleteCard = (id: number) => {
     deleteCard(id);
-    setUpdate[1].toggle();
+    toggle();
   };
 
   return (

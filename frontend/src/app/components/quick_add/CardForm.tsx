@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { SetStateAction, useRef } from "react";
 import { createStyles, Divider, rem} from '@mantine/core';
 import { useInputState, } from '@mantine/hooks';
 import useCardsFacade from '../../facades/useCardsFacade';
@@ -37,7 +37,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function CardForm() {
+interface CardFormProps {
+  toggle: (value?: SetStateAction<boolean> | undefined) => void
+}
+
+export default function CardForm({toggle}:CardFormProps) {
   const { addCard } = useCardsFacade();
 
   const { classes } = useStyles();
@@ -64,6 +68,7 @@ export default function CardForm() {
     addCard(newCard)
       .then(() => {
         console.log('card added', newCard)
+        toggle()
       })
       .catch((error) => {
         console.log('error adding card', error)
