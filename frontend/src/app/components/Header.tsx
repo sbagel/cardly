@@ -99,10 +99,10 @@ export default function DoubleHeader() {
         <a href='/'><h1 className={classes.logo}>Cardly</h1></a>
         <div className={classes.links}>
           <Group spacing={0} position="right" className={classes.mainLinks}>
-            <ItemTemplate icon={<FaPlus/>} url="#" label="bleh"/>
-            <ItemTemplate icon={<FaLightbulb/>} url="#" label="bleh1"/>
-            <ItemTemplate icon={<FaBell/>} url="#" label="bleh2"/>
-            <ItemTemplate icon={<FaUser/>} url="#" label="bleh3"/>
+            <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
+            <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
+            <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
+            <ItemTemplate icon={<FaUser/>} url="/user" label="user"/>
           </Group>
         </div>
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
