@@ -68,7 +68,7 @@ const useUsersStore = create<UsersState>((set) => ({
       set((state) => ({
         ...state,
         error: "",
-        users: state.users.map((u) => (u.id === updatedUser.id ? updatedUser : u)),
+        users: state.user.map((u) => (u.id === updatedUser.id ? updatedUser : u)),
       }));
     } catch (error) {
       set((state) => ({
@@ -91,7 +91,6 @@ const useUsersStore = create<UsersState>((set) => ({
       set((state) => ({
         ...state,
         error: "",
-        users: state.users.filter((user) => user.id !== id),
       }));
     } catch (error) {
       set((state) => ({

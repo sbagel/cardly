@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { createStyles, Divider, Container, rem} from '@mantine/core';
 import { useInputState, useDisclosure } from '@mantine/hooks';
+import useCardsFacade from '../../facades/useCardsFacade';
 import useAutosizeTextArea from "../../../hooks/useAutosizeTextArea";
 import { FaAngleDown } from 'react-icons/fa';
 import DeckModal from "./DeckModal";
@@ -76,6 +77,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function QuickAdd() {
+  const { addCard } = useCardsFacade();
+
   const { classes } = useStyles();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -90,25 +93,50 @@ export default function QuickAdd() {
   useAutosizeTextArea(termAreaRef.current, termValue);
   useAutosizeTextArea(definitionAreaRef.current, definitionValue);
 
+  const handleSubmitCard: React.FormEventHandler<HTMLFormElement> = () => {
+    const newCard = {
+      id: 0,
+      deckId: 2,
+      front: termValue,
+      back: definitionValue,
+      favorited: false
+    }
 
+    addCard(newCard)
+      .then(() => {
+        console.log('card added', newCard)
+      })
+      .catch((error) => {
+        console.log('error adding card', error)
+      })
+  }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      handleSubmitCard(event);
+    }
+  };
 
   return (
     <Container className={classes.inner} mb={60}>
       <DeckModal opened={opened} close={close}/>
       <div className={classes.folder}>
         <div className={classes.folderTop}>
-          <div className={classes.folderLabel}>
+          {/* <div className={classes.folderLabel}>
             x
-          </div>
+          </div> */}
           <div className={classes.deckLabel} onClick={open}>
             {deckName}&nbsp;<FaAngleDown/>
           </div>
         </div>
-        <div className={classes.folderBottom}>
+        <form onSubmit={handleSubmitCard} onKeyDown={handleKeyDown} className={classes.folderBottom}>
           <textarea ref={termAreaRef} placeholder={termValue} onChange={setTermValue} className={classes.inputBox}></textarea>
             <Divider style={{width:'96%'}} color="gray.2" my="xs" />
           <textarea ref={definitionAreaRef} placeholder={definitionValue} onChange={setDefinitionValue} className={classes.inputBox}></textarea>
-        </div>
+        </form>
+        {/* <div>
+          <button>enter</button>
+        </div> */}
       </div>
     </Container>
   )
