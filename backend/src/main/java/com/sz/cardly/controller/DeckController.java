@@ -25,21 +25,21 @@ public class DeckController {
     }
 
     @PostMapping("/add")
-    public Deck addDeck(@RequestBody Deck folder) {
+    public Deck addDeck(@RequestBody Deck deck) {
         LocalDateTime date = LocalDateTime.now();
-        folder.setCreationDate(date);
-        folder.setLastViewDate(date);
+        deck.setCreationDate(date);
+        deck.setLastViewDate(date);
 
-        return deckService.addDeck(folder);
+        return deckService.addDeck(deck);
     }
 
     @PutMapping("/{id}")
-    public boolean updateDeck(@PathVariable("id") int id,@RequestBody Deck folder) {
+    public boolean updateDeck(@PathVariable("id") int id,@RequestBody Deck deck) {
         Deck original = deckService.getDeckByID(id);
-        folder.setCreationDate(original.getCreationDate());
-        folder.setLastViewDate(LocalDateTime.now());
-        folder.setId(id);
-        return deckService.updateDeck(folder);
+        deck.setCreationDate(original.getCreationDate());
+        deck.setLastViewDate(LocalDateTime.now());
+        deck.setId(id);
+        return deckService.updateDeck(deck);
     }
 
     @DeleteMapping("/{id}")
