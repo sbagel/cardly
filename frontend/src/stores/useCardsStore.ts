@@ -36,7 +36,7 @@ const useCardsStore = create<CardsState>((set) => ({
         body: JSON.stringify(card),
       });
       const newCard = await res.json();
-      set((state) => ({ ...state, error: "", cards: [...state.cards, newCard] }));
+      set((state) => ({ ...state, error: "", cards: [newCard, ...state.cards] }));
     } catch (error) {
       set((state) => ({
         ...state,
