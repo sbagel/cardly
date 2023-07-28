@@ -1,9 +1,8 @@
 import { createStyles, NavLink, rem, Divider } from '@mantine/core';
-import { useInputState, useDisclosure, useHover } from '@mantine/hooks';
+import { useInputState, useHover } from '@mantine/hooks';
 import { Card as CardType } from "../../../types/CardTypes";
 import useCardsFacade from '../../facades/useCardsFacade';
 import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
-import { SetStateAction } from 'react';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -48,10 +47,9 @@ const useStyles = createStyles((theme) => ({
 
 interface CardProps {
   card: CardType;
-  toggle: (value?: SetStateAction<boolean> | undefined) => void;
 }
 
-export default function Card({ card, toggle }: CardProps) {
+export default function Card({ card }: CardProps) {
   const { deleteCard } = useCardsFacade();
 
   const { classes } = useStyles();
@@ -61,23 +59,18 @@ export default function Card({ card, toggle }: CardProps) {
   const [termValue, setTermValue] = useInputState(card.front);
   const [definitionValue, setDefinitionValue] = useInputState(card.back);
 
-  const handleDeleteCard = (id: number) => {
-    deleteCard(id);
-    toggle();
-  };
-
   return (
-      <div className={classes.card} ref={ref}>
-        {hovered &&
-         <div className={classes.ellipsisContainer}>
-          <NavLink component="div" className={classes.ellipsisIcon} childrenOffset={28} rightSection={<FaEllipsis/>}>
-            <NavLink component="div" className={classes.editCardLabel} icon={<FaPenToSquare size={15}/>} label="Edit card" />
-            <NavLink component="div" onClick={() => handleDeleteCard(card.id)} className={classes.editCardLabel} icon={<FaTrashCan size={15}/>} label="Delete card" />
-          </NavLink>
-        </div>}
-        <div className={classes.value}>{termValue}</div>
-          <Divider style={{width:'96%'}} color="gray.2" my="xs" />
-        <div className={classes.value}>{definitionValue}</div>
-      </div>
+    <div className={classes.card} ref={ref}>
+    {hovered &&
+     <div className={classes.ellipsisContainer}>
+      <NavLink component="div" className={classes.ellipsisIcon} childrenOffset={28} rightSection={<FaEllipsis/>}>
+        <NavLink component="div" className={classes.editCardLabel} icon={<FaPenToSquare size={15}/>} label="Edit card" />
+        <NavLink component="div" onClick={() => deleteCard(card.id)} className={classes.editCardLabel} icon={<FaTrashCan size={15}/>} label="Delete card" />
+      </NavLink>
+    </div>}
+    <div className={classes.value}>{termValue}</div>
+      <Divider style={{width:'96%'}} color="gray.2" my="xs" />
+    <div className={classes.value}>{definitionValue}</div>
+  </div>
   )
 }

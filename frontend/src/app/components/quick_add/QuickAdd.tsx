@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { FaAngleDown } from 'react-icons/fa';
 import DeckModal from "./DeckModal";
 import CardForm from "./CardForm";
-import { SetStateAction } from 'react';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -45,11 +44,10 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-interface QuickAddProps {
-  toggle: (value?: SetStateAction<boolean> | undefined) => void
-}
+// interface QuickAddProps {
+// }
 
-export default function QuickAdd({toggle}:QuickAddProps) {
+export default function QuickAdd() {
 
   const { classes } = useStyles();
 
@@ -69,7 +67,7 @@ export default function QuickAdd({toggle}:QuickAddProps) {
             {deckName}&nbsp;<FaAngleDown/>
           </div>
         </div>
-        <CardForm toggle={toggle}/>
+        <CardForm/>
         {/* <div>
           <button>enter</button>
         </div> */}
