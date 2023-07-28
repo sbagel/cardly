@@ -41,18 +41,24 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface LinkProps {
-  label: string;
-  link: string;
-}
-
-interface ToggleHeaderProps {
-  toggleLinks: LinkProps[];
-}
-
-export default function ToggleHeader({ toggleLinks }: ToggleHeaderProps) {
+export default function ToggleHeader() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(0);
+
+  const toggleLinks = [
+    {
+      "link": "#",
+      "label": "New Deck"
+    },
+    {
+      "link": "#",
+      "label": "My Decks"
+    },
+    {
+      "link": "#",
+      "label": "Public Decks"
+    },
+  ]
 
   const toggleItems = toggleLinks.map((item, index) => (
     <Anchor<'a'>

@@ -5,25 +5,10 @@ import RecentlyAddedCards from '../components/recently_added_cards/RecentlyAdded
 
 export default function Add() {
 
-  const toggleLinks = [
-    {
-      "link": "#",
-      "label": "New Deck"
-    },
-    {
-      "link": "#",
-      "label": "My Decks"
-    },
-    {
-      "link": "#",
-      "label": "Public Decks"
-    },
-  ]
-
   return (
     <>
       <Header/>
-      <ToggleHeader toggleLinks={toggleLinks}/>
+      <ToggleHeader/>
       <QuickAdd/>
       <RecentlyAddedCards/>
     </>
