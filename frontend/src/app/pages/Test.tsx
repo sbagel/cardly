@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, Link } from 'react-router-dom';
 import useUsersFacade from "../facades/useUsersFacade";
+import Demo from "../components/Demo";
 
 function Test() {
 
@@ -10,11 +11,17 @@ function Test() {
     fetchUsers(1);
   }, []);
 
-  console.log("User ID:", user.id);
+  // console.log("User ID:", user.id);
 
 
   return (
     <>
+
+    <Demo/>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
       <div className="Test">
         Test! <Link to="/add">add</Link>
       </div>

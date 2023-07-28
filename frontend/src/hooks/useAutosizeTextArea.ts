@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { rem } from '@mantine/core';
 
 const useAutosizeTextArea = (
-  textAreaRef: HTMLTextAreaElement | null,
+  textAreaRef: HTMLInputElement | null,
   value: string
 ) => {
   useEffect(() => {

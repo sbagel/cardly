@@ -45,7 +45,6 @@ export default function CardForm() {
 
   const { classes } = useStyles();
 
-
   const [termValue, setTermValue] = useInputState('Enter term');
   const [definitionValue, setDefinitionValue] = useInputState('Enter definition');
 
