@@ -24,9 +24,6 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '20px',
     overflowWrap: 'break-word',
     resize: 'vertical',
-    '&[data-error="true"]': {
-      color: 'blue',
-    },
   },
   btn: {
     visibility: 'hidden',
@@ -44,8 +41,8 @@ export default function CardForm() {
     initialValues: { id: 0, deckId: 2, front: '', back: '', favorited: false},
 
     validate: {
-      front: (value) => (value.split(" ").length < 2 ? 'Card term must have at least 2 words' : null),
-      back: (value) => (value.length < 1 ? 'Card defintion is empty' : null),
+      front: (value) => (value.trim().length < 1 || value.split(" ").length < 2 ? 'Card term must have at least 2 words' : null),
+      back: (value) => (value.trim().length < 1 ? 'Card defintion is empty' : null),
     },
   });
 
@@ -70,8 +67,6 @@ export default function CardForm() {
       form.setFieldValue('back', '');
     }
   }
-
-  console.log(form.errors)
 
 
   return (
