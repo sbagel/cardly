@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createStyles, Container, Group, rem } from '@mantine/core';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -46,6 +46,10 @@ export default function ToggleHeader() {
   const location = useLocation();
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/decks/public' ? 2 : 0);
+
+  useEffect(() => {
+    setActive(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/decks/public' ? 2 : 0)
+  }, [location.pathname])
 
   const toggleLinks = [
     {
