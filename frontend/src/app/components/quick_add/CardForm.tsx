@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-export default function Demo() {
+export default function CardForm() {
   const { addCard } = useCardsFacade();
 
   const { classes } = useStyles();
@@ -56,20 +56,26 @@ export default function Demo() {
   useAutosizeTextArea(termAreaRef.current, form.values.front);
   useAutosizeTextArea(definitionAreaRef.current, form.values.back);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+  const handleEnter = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       btnRef.current?.click();
-      if (Object.keys(form.errors).length == 0 && form.values.front !== '' && form.values.back !== '') {
-        form.setFieldValue('front', '');
-        form.setFieldValue('back', '');
-      }
+      clearForm();
     }
   };
 
+  const clearForm = () => {
+    if (form.isValid('front') && form.isValid('back')) {
+      form.setFieldValue('front', '');
+      form.setFieldValue('back', '');
+    }
+  }
+
+  console.log(form.errors)
+
 
   return (
-    <form onSubmit={form.onSubmit(addCard)} className={classes.folderBottom} onKeyDown={handleKeyDown}>
+    <form onSubmit={form.onSubmit(addCard)} className={classes.folderBottom} onKeyUp={handleEnter}>
       <Textarea
         autoFocus
         ref={termAreaRef}
