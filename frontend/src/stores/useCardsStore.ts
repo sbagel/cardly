@@ -5,7 +5,7 @@ const API_URL = "http://localhost:8080/api/card";
 
 const useCardsStore = create<CardsState>((set) => ({
   cards: [],
-  loading: false,
+  loading: true,
   error: "",
   fetchCards: async (deckId: number) => {
     set((state) => ({ ...state, loading: true }));
