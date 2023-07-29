@@ -18,7 +18,7 @@ export default function RecentlyAddedCards() {
   }, [fetchCards]);
 
   return (
-    <Container className={classes.inner}>
+    <Container className={classes.inner} mb={60}>
       <Text fw={700} fz={rem(20)}>Recently added cards</Text>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
