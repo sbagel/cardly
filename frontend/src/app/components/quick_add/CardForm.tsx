@@ -24,6 +24,9 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '20px',
     overflowWrap: 'break-word',
     resize: 'vertical',
+    '&[data-error="true"]': {
+      color: 'blue',
+    },
   },
   btn: {
     visibility: 'hidden',
@@ -57,16 +60,34 @@ export default function Demo() {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       btnRef.current?.click();
+      if (Object.keys(form.errors).length == 0 && form.values.front !== '' && form.values.back !== '') {
+        form.setFieldValue('front', '');
+        form.setFieldValue('back', '');
+      }
     }
   };
 
+
   return (
     <form onSubmit={form.onSubmit(addCard)} className={classes.folderBottom} onKeyDown={handleKeyDown}>
-      <Textarea ref={termAreaRef} placeholder="Enter Term" className={classes.inputBox} variant="unstyled" {...form.getInputProps('front')} styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
+      <Textarea
+        autoFocus
+        ref={termAreaRef}
+        placeholder="Enter Term"
+        className={classes.inputBox}
+        variant="unstyled"
+        {...form.getInputProps('front')}
+        styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
 
         <Divider style={{width:'96%'}} color="gray.2" my="xs" />
 
-      <Textarea ref={definitionAreaRef} placeholder="Enter Definition" className={classes.inputBox} variant="unstyled" {...form.getInputProps('back')} styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
+      <Textarea
+        ref={definitionAreaRef}
+        placeholder="Enter Definition"
+        className={classes.inputBox}
+        variant="unstyled"
+        {...form.getInputProps('back')}
+        styles={{ error: { color: 'black', }, input: {fontSize: rem(20)}}}/>
 
       <Button ref={btnRef} type="submit" mt="sm" className={classes.btn}></Button>
     </form>
