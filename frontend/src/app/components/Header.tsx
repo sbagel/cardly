@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import { createStyles, keyframes, Header, Container, Anchor, Group, Burger, rem } from '@mantine/core';
+import { createStyles, keyframes, Header, Container, Group, Burger, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { FaPlus, FaLightbulb, FaBell, FaUser } from 'react-icons/fa';
+import { Outlet, Link } from 'react-router-dom';
+import ToggleHeader from './ToggleHeader';
 
 const HEADER_HEIGHT = rem(84);
 
@@ -79,13 +81,12 @@ interface LinkProps {
 function ItemTemplate({ icon, url, label }: LinkProps) {
   const { classes, cx } = useStyles();
   return (
-    <Anchor<'a'>
-      href={url}
+    <Link to={url}
       key={label}
       className={cx(classes.mainLink)}
     >
       {icon}
-    </Anchor>
+    </Link>
   )
 }
 
@@ -94,9 +95,10 @@ export default function DoubleHeader() {
   const { classes } = useStyles();
 
   return (
+    <>
     <Header height={HEADER_HEIGHT} mb={20}>
       <Container className={classes.inner}>
-        <a href='/'><h1 className={classes.logo}>Cardly</h1></a>
+        <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
         <div className={classes.links}>
           <Group spacing={0} position="right" className={classes.mainLinks}>
             <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
@@ -108,5 +110,8 @@ export default function DoubleHeader() {
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
       </Container>
     </Header>
+    <ToggleHeader/>
+    <Outlet/>
+    </>
   );
 }
