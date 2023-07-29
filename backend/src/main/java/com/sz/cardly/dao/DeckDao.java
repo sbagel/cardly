@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface DeckDao {
     Deck getDeckByID(int id);
+    List<Deck> getAllDecksByUserId(int userId);
     List<Deck> getAllDecks();
     Deck addDeck(Deck deck);
     boolean updateDeck(Deck deck);
