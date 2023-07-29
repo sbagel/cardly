@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { createStyles, Container, Anchor, Group, rem } from '@mantine/core';
+import { createStyles, Container, Group, rem } from '@mantine/core';
+import { Link, useLocation } from 'react-router-dom';
 
 const HEADER_HEIGHT = rem(100);
 
@@ -42,16 +43,17 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function ToggleHeader() {
+  const location = useLocation();
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/decks/public' ? 2 : 0);
 
   const toggleLinks = [
     {
-      "link": "#",
+      "link": "/add",
       "label": "New Deck"
     },
     {
-      "link": "#",
+      "link": "/decks",
       "label": "My Decks"
     },
     {
@@ -61,8 +63,7 @@ export default function ToggleHeader() {
   ]
 
   const toggleItems = toggleLinks.map((item, index) => (
-    <Anchor<'a'>
-      href={item.link}
+    <Link to={item.link}
       key={item.label}
       className={cx(classes.toggleLink, { [classes.toggleLinkActive]: index === active })}
       onClick={() => {
@@ -70,10 +71,11 @@ export default function ToggleHeader() {
       }}
     >
       {item.label}
-    </Anchor>
+    </Link>
   ));
 
   return (
+    <>
     <Container className={classes.inner} mb={40}>
       <div className={classes.links}>
         <Group spacing={0} className={classes.toggleLinks}>
@@ -81,5 +83,6 @@ export default function ToggleHeader() {
         </Group>
       </div>
     </Container>
+    </>
   );
 }
