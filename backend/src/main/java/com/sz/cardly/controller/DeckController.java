@@ -15,7 +15,7 @@ public class DeckController {
     private DeckService deckService;
 
     @GetMapping("/all")
-    public List<Deck> getAllDecksByUserId(@PathVariable ("userId") int userId) {
+    public List<Deck> getAllDecksByUserId(@RequestParam("userId") int userId) {
         return deckService.getAllDecksByUserId(userId);
     }
 
