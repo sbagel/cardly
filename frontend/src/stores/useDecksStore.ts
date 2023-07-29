@@ -5,7 +5,13 @@ const API_URL = "http://localhost:8080/api/deck";
 
 const useDeckStore = create<DecksState>((set) => ({
   decks: [],
-  loading: true,
+  currentDeck: {
+    id: 0,
+    userId: 0,
+    title: '',
+    visible: false,
+  },
+  loading: false,
   error: "",
   fetchDecks: async (userId: number) => {
     set((state) => ({ ...state, loading: true }));
@@ -107,6 +113,24 @@ const useDeckStore = create<DecksState>((set) => ({
       }));
     }
   },
+  selectDeck: async (id: number) => {
+    set((state) => ({ ...state, loading: true }));
+    try {
+      const res = await fetch(`${API_URL}/${id}`);
+      const currentDeck = await res.json();
+      set((state) => ({ ...state, error: "", currentDeck }));
+    } catch (error) {
+      set((state) => ({
+        ...state,
+        error: error.message,
+      }));
+    } finally {
+      set((state) => ({
+        ...state,
+        loading: false,
+      }));
+    }
+  }
 }));
 
 export default useDeckStore;
