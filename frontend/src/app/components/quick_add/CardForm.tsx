@@ -38,7 +38,7 @@ export default function CardForm() {
   const { classes } = useStyles();
 
   const form = useForm({
-    initialValues: { id: 0, deckId: 2, front: '', back: '', favorited: false},
+    initialValues: { id: 0, deckId: 1, front: '', back: '', favorited: false},
 
     validate: {
       front: (value) => (value.trim().length < 1 || value.split(" ").length < 2 ? 'Card term must have at least 2 words' : null),

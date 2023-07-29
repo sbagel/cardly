@@ -14,7 +14,7 @@ export default function RecentlyAddedCards() {
   const { classes } = useStyles();
 
   useEffect(() => {
-    fetchCards(2);
+    fetchCards(1);
   }, [fetchCards]);
 
   return (
