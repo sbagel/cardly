@@ -26,7 +26,7 @@ public class DeckDaoDB implements DeckDao{
     @Override
     public List<Deck> getAllDecksByUserId(int userId) {
         final String sql = "SELECT * FROM Deck WHERE UserID = ? ORDER BY lastViewDate DESC";
-        return jdbc.query(sql, new DeckMapper());
+        return jdbc.query(sql, new DeckMapper(), userId);
     }
 
     @Override
