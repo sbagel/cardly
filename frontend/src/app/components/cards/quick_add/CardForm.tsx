@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useForm } from '@mantine/form';
 import { Button, createStyles, Divider, rem, Textarea } from '@mantine/core';
-import useAutosizeTextArea from "../../../hooks/useAutosizeTextArea";
-import useCardsFacade from "../../facades/useCardsFacade";
+import useAutosizeTextArea from "../../../../hooks/useAutosizeTextArea";
+import useCardsFacade from "../../../facades/useCardsFacade";
 
 const useStyles = createStyles((theme) => ({
   folderBottom: {

@@ -1,7 +1,8 @@
 export interface Deck {
   id: number;
-  userId: number;
+  userID: number;
   title: string;
+  description: string;
   visible: boolean;
 }
 

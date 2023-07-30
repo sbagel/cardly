@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { createStyles, rem, TextInput, Modal} from '@mantine/core';
-import { useInputState, useDebouncedValue } from '@mantine/hooks';
+import { useInputState } from '@mantine/hooks';
 import { FaSearch } from 'react-icons/fa';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
+  content: {
+    padding: rem(20),
+  },
   title: {
-    fontSize: rem(20),
+    fontSize: rem(28),
     fontWeight: 800
   },
 }));
@@ -19,7 +22,6 @@ export default function DeckModal({opened, close}: DeckModalProps) {
   const { classes } = useStyles();
 
   const [query, setQuery] = useInputState('');
-  const [debouncedQuery] = useDebouncedValue(query, 200);
 
   useEffect(() => {
 
@@ -28,7 +30,7 @@ export default function DeckModal({opened, close}: DeckModalProps) {
   return (
       <Modal.Root opened={opened} onClose={close} size='xl'>
         <Modal.Overlay />
-        <Modal.Content>
+        <Modal.Content className={classes.content}>
           <Modal.Header>
             <Modal.Title className={classes.title}>Choose a deck</Modal.Title>
             <Modal.CloseButton />

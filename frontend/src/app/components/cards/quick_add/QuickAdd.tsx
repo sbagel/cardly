@@ -1,8 +1,8 @@
 import { createStyles, Container, rem} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { FaAngleDown } from 'react-icons/fa';
-import DeckModal from "./DeckModal";
 import CardForm from "./CardForm";
+import ChooseDeckModal from "../../decks/ChooseDeckModal";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -57,7 +57,7 @@ export default function QuickAdd() {
 
   return (
     <Container className={classes.inner} mb={60}>
-      <DeckModal opened={opened} close={close}/>
+      <ChooseDeckModal opened={opened} close={close}/>
       <div className={classes.folder}>
         <div className={classes.folderTop}>
           {/* <div className={classes.folderLabel}>

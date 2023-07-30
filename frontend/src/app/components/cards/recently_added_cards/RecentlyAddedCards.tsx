@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createStyles, Container, Text, rem } from '@mantine/core';
-import useCardsFacade from '../../facades/useCardsFacade';
-import Card from './Card.tsx';
+import useCardsFacade from '../../../facades/useCardsFacade';
+import Card from '../Card.tsx';
 
 const useStyles = createStyles(() => ({
   inner: {
@@ -24,7 +24,7 @@ export default function RecentlyAddedCards() {
       {error && <p>{error}</p>}
       {cards?.length > 0 && (
         cards.map((card) => (
-          <Card card={card} key={`key-${card.id}`} />
+          <Card card={card} key={`cardkey-${card.id}`} />
         ))
       )}
     </Container>
