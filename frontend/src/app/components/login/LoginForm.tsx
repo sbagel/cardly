@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { createStyles, Box, rem, TextInput, Button, PasswordInput} from '@mantine/core';
 import useUsersFacade from '../../facades/useUsersFacade';
-import useDecksFacade from '../../facades/useDecksFacade';
 
 const useStyles = createStyles(() => ({
   content: {
@@ -46,6 +44,7 @@ export default function LoginForm() {
           {/* username */}
            <TextInput
               label="Username"
+              required
               placeholder="Type your username"
               radius="md"
               size="xl"

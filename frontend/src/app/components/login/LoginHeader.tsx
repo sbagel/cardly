@@ -1,7 +1,7 @@
 import { createStyles, Header, Container, Group, rem } from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
 import {  Link } from 'react-router-dom';
-import LoginModal from './loginModal';
+import LoginOrSignupModal from './LoginOrSignupModal';
 
 const HEADER_HEIGHT = rem(84);
 
@@ -78,7 +78,7 @@ export default function LoginHeader() {
           </div>
       </Container>
     </Header>
-    <LoginModal opened={opened} close={close}/>
+    <LoginOrSignupModal opened={opened} close={close}/>
     </>
   )
 }

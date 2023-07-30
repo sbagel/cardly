@@ -42,6 +42,26 @@ const useUsersStore = create<UsersState>((set) => {
         });
         const newUser = await res.json();
         set((state) => ({ ...state, error: "", user: newUser }));
+
+        try {
+          const firstDeck = {
+             userID: newUser.id,
+             title: 'My First Deck',
+             description: '',
+          }
+          await fetch(`http://localhost:8080/api/deck/add`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(firstDeck),
+          });
+        } catch (error) {
+          set((state) => ({
+            ...state,
+            error: error.message,
+          }));
+        }
       } catch (error) {
         set((state) => ({
           ...state,

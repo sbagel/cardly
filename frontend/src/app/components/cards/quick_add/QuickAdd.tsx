@@ -51,7 +51,7 @@ export default function QuickAdd() {
 
   const { currentDeck } = useDecksFacade();
 
-  const deckName = currentDeck.title.length > 0 ? currentDeck.title : 'My First Deck';
+  const deckName = currentDeck.title.length > 0 ? currentDeck.title : 'Loading';
 
   return (
     <Container className={classes.inner} mb={60}>
