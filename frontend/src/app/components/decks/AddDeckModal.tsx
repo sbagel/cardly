@@ -27,7 +27,8 @@ interface DeckModalProps {
 
 export default function AddDeckModal({opened, close}: DeckModalProps) {
   const [debounced] = useDebouncedValue(opened, 200);
-  const { titles, addDeck, fetchDeckTitles } = useDecksFacade()
+  const { titles, currentDeck, addDeck, fetchDeckTitles } = useDecksFacade();
+  const [debouncedCurrent] = useDebouncedValue(currentDeck, 200);
   const { classes } = useStyles();
 
   const form = useForm({
@@ -47,6 +48,12 @@ export default function AddDeckModal({opened, close}: DeckModalProps) {
     form.setFieldValue('title', '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced])
+
+  useEffect(() => {
+    if (currentDeck !== debouncedCurrent) close()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentDeck])
+
 
   return (
     <Modal.Root opened={opened} onClose={close} size='xl'>

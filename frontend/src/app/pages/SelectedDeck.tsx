@@ -19,8 +19,6 @@ export default function SelectedDeck() {
   const deck = location.state.deck;
   const url = location.state.return;
 
-  console.log(location)
-
   return (
     <Container className={classes.inner}>
       <div onClick={()=> navigate(url)} className={classes.arrowContainer}>
