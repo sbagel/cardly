@@ -1,17 +1,14 @@
 import { useEffect } from "react";
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mantine/core';
 import useUsersFacade from "../facades/useUsersFacade";
 
 function Test() {
-  // const { user, login, logout } = useAuth();
+  const navigate = useNavigate();
   const { user, loading, error, fetchUser, login, logout } = useUsersFacade();
 
-  // useEffect(() => {
-  //   fetchUser(1);
-  // }, []);
-
   useEffect(() => {
+    user && navigate('/add');
     console.log('user', user)
   }, [user])
 

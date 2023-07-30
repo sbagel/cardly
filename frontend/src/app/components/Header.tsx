@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { createStyles, keyframes, Header, Container, Group, Burger, rem } from '@mantine/core';
+import { createStyles, keyframes, Header, Container, Group, Burger, rem, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { FaPlus, FaLightbulb, FaBell, FaUser } from 'react-icons/fa';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import useUsersFacade from '../facades/useUsersFacade';
 import ToggleHeader from './ToggleHeader';
 
@@ -40,10 +40,19 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-
+    position: 'relative',
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
+  },
+
+  userDropdownContainer: {
+    display: 'block',
+    backgroundColor: 'blue',
+    height: rem(40),
+    widht: rem(80),
+    position: 'absolute',
+    bottom: 0
   },
 
   mainLinks: {
@@ -92,7 +101,8 @@ function ItemTemplate({ icon, url, label }: LinkProps) {
 }
 
 export default function DoubleHeader() {
-  const { user } = useUsersFacade();
+  const { user, logout } = useUsersFacade();
+  const navigate = useNavigate();
   const location = useLocation();
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
@@ -111,7 +121,16 @@ export default function DoubleHeader() {
                   <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
                   <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
                   <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
-                  <ItemTemplate icon={<FaUser/>} url="/user" label="user"/>
+                  <Menu transitionProps={{ transition: 'pop' }} offset={0}>
+                    <Menu.Target>
+                    <div className={classes.mainLink}><FaUser/></div>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Menu.Item onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
+
+                      {/* <Menu.Divider /> */}
+                    </Menu.Dropdown>
+                  </Menu>
                 </Group>
               )}
           </div>

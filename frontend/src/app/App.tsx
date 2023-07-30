@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
