@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { createStyles, rem, TextInput, Modal} from '@mantine/core';
 import { useInputState } from '@mantine/hooks';
 import { FaSearch } from 'react-icons/fa';
+import useDecksFacade from '../../facades/useDecksFacade';
 
 const useStyles = createStyles(() => ({
   content: {
@@ -20,6 +21,8 @@ interface DeckModalProps {
 
 export default function DeckModal({opened, close}: DeckModalProps) {
   const { classes } = useStyles();
+
+  const { decks } = useDecksFacade();
 
   const [query, setQuery] = useInputState('');
 
@@ -44,6 +47,12 @@ export default function DeckModal({opened, close}: DeckModalProps) {
                   radius="md"
                   size="xl"
                 />
+
+              {decks?.length > 0 && (
+                decks.map((deck) => (
+                  deck.title
+                ))
+              )}
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>

@@ -1,4 +1,4 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, Outlet } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
 import Test from "./pages/Test";
@@ -6,6 +6,7 @@ import Add from "./pages/Add";
 import UserDecks from './pages/UserDecks';
 import NotFound from "./pages/NotFound";
 import Header from './components/Header.tsx'
+import SelectedDeck from './pages/SelectedDeck.tsx';
 import './index.css';
 
 const router = createBrowserRouter(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route index element={<Test />} />
       <Route path="add" element={<Add />} />
       <Route path="decks" element={<UserDecks />} />
+      <Route path="decks/:deckId" element={<SelectedDeck />} />
       <Route path='*' element={<NotFound />}/>
     </Route>
   )

@@ -3,6 +3,7 @@ import DeathStarPattern from "../DeathStarPattern.tsx";
 import { createStyles, rem, NavLink} from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
 import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 import DeleteDeckModal from "./DeleteDeckModal.tsx";
 import EditDeckModal from "./EditDeckModal.tsx";
 
@@ -65,6 +66,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Deck({deck, index}: DeckProps) {
+  const navigate = useNavigate();
+
   const { classes } = useStyles();
 
   const { hovered, ref } = useHover();
@@ -78,7 +81,7 @@ export default function Deck({deck, index}: DeckProps) {
   const color = deck.title === 'Loading....' ? 'lightgray' : colors[index%2]
 
   return (
-    <div className={classes.deck} ref={ref} >
+    <div className={classes.deck} ref={ref} onClick={() => navigate(`/decks/${deck.id}?deckName=${deck.title}`,{state: {deck: deck, return: '/decks'}})}>
       <DeleteDeckModal deckId={deck.id} opened={openedDeleteModal} close={deleteHandler.close}/>
       <EditDeckModal deck={deck} opened={openedEditModal} close={editHandler.close}/>
       {hovered &&

@@ -152,7 +152,7 @@ export default function UserDecks() {
                 return deck.title.toLowerCase().includes(query.toLowerCase())
               })
               .map((deck, index) => (
-                <Deck deck={deck} index={index} key={`deckkey-${deck.id}`}/>
+                <Deck deck={deck} index={index} key={`deck-display-key-${deck.id}`}/>
               ))
           )
         }

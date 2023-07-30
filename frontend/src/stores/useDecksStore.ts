@@ -113,23 +113,8 @@ const useDeckStore = create<DecksState>((set) => ({
       }));
     }
   },
-  selectDeck: async (id: number) => {
-    set((state) => ({ ...state, loading: true }));
-    try {
-      const res = await fetch(`${API_URL}/${id}`);
-      const currentDeck = await res.json();
-      set((state) => ({ ...state, error: "", currentDeck }));
-    } catch (error) {
-      set((state) => ({
-        ...state,
-        error: error.message,
-      }));
-    } finally {
-      set((state) => ({
-        ...state,
-        loading: false,
-      }));
-    }
+  selectDeck: async (deck: Deck) => {
+    set((state) => ({ ...state,  currentDeck: deck }));
   }
 }));
 

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { createStyles, keyframes, Header, Container, Group, Burger, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { FaPlus, FaLightbulb, FaBell, FaUser } from 'react-icons/fa';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import ToggleHeader from './ToggleHeader';
 
 const HEADER_HEIGHT = rem(84);
@@ -91,27 +91,31 @@ function ItemTemplate({ icon, url, label }: LinkProps) {
 }
 
 export default function DoubleHeader() {
+  const location = useLocation();
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
+  const queryParams = new URLSearchParams(location.search);
+  const deckName = queryParams.get('deckName');
+
   return (
     <>
-    <Header height={HEADER_HEIGHT} mb={20}>
-      <Container className={classes.inner}>
-        <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
-        <div className={classes.links}>
-          <Group spacing={0} position="right" className={classes.mainLinks}>
-            <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
-            <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
-            <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
-            <ItemTemplate icon={<FaUser/>} url="/user" label="user"/>
-          </Group>
-        </div>
-        <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-      </Container>
-    </Header>
-    <ToggleHeader/>
-    <Outlet/>
+      <Header height={HEADER_HEIGHT} mb={20}>
+        <Container className={classes.inner}>
+          <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
+          <div className={classes.links}>
+            <Group spacing={0} position="right" className={classes.mainLinks}>
+              <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
+              <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
+              <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
+              <ItemTemplate icon={<FaUser/>} url="/user" label="user"/>
+            </Group>
+          </div>
+          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+        </Container>
+      </Header>
+      {!deckName && <ToggleHeader/>}
+      <Outlet/>
     </>
   );
 }
