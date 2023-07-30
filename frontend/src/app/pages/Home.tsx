@@ -16,8 +16,9 @@ export default function Home() {
 
     if (user !== debounced && user) {
       login(user);
-      navigate('/add');
       fetchDecks(user.id);
+
+      navigate('/add');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
