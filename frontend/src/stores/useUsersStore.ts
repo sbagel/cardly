@@ -120,6 +120,10 @@ const useUsersStore = create<UsersState>((set) => {
       localStorage.removeItem(localStorageKey);
       set((state) => ({ ...state, user: null }));
     },
+    checkStorage: () => {
+      const storedUser = localStorage.getItem(localStorageKey);
+      storedUser ? set((state) => ({ ...state, user: JSON.parse(storedUser) })) : null;
+    }
   }
 });
 

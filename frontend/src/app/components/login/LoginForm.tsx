@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { createStyles, Box, rem, TextInput, Button, PasswordInput} from '@mantine/core';
 import useUsersFacade from '../../facades/useUsersFacade';
+import useDecksFacade from '../../facades/useDecksFacade';
 
 const useStyles = createStyles(() => ({
   content: {
@@ -22,7 +23,7 @@ const useStyles = createStyles(() => ({
 }));
 
 export default function LoginForm() {
-  const { user, fetchUser, login } = useUsersFacade();
+  const { fetchUser } = useUsersFacade();
   const { classes } = useStyles();
 
   const form = useForm({
@@ -38,10 +39,6 @@ export default function LoginForm() {
       .catch((error) => console.log('error logging in', error))
   }
 
-  useEffect(()=>{
-    if (user !== null) login(user)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
 
   return (
     <div>

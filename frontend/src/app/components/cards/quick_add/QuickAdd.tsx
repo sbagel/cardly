@@ -45,9 +45,6 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-// interface QuickAddProps {
-// }
-
 export default function QuickAdd() {
 
   const { classes } = useStyles();

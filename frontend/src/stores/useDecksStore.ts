@@ -20,7 +20,7 @@ const useDeckStore = create<DecksState>((set) => ({
     try {
       const res = await fetch(`${API_URL}/all?userId=${userId}`);
       const decks = await res.json();
-      set((state) => ({ ...state, error: "", decks }));
+      set((state) => ({ ...state, error: "", decks, currentDeck: decks[0] }));
     } catch (error) {
       set((state) => ({
         ...state,

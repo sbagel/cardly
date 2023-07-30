@@ -15,4 +15,5 @@ export interface UsersState {
   deleteUser: (id: number) => Promise<void>;
   login: (user: User | null) => Promise<void>;
   logout: () => void;
+  checkStorage: () => void;
 }
