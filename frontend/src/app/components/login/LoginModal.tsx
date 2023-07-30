@@ -1,15 +1,35 @@
-import { createStyles, rem, TextInput, Modal, NavLink} from '@mantine/core';
+import { createStyles, rem, Modal, Group} from '@mantine/core';
+import { GrClose } from "react-icons/gr";
+import LoginForm from './LoginForm';
 
-const useStyles = createStyles(() => ({
-  content: {
+const useStyles = createStyles((theme) => ({
+  inner: {
+    display: 'flex',
+    width: '100%',
+    height: '100vh',
+    position: 'relative'
+  },
+  closeBtn: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
     padding: rem(20),
+    cursor: 'pointer'
   },
-  title: {
-    fontSize: rem(28),
-    fontWeight: 800
+  contentContainer: {
+    width: '100%',
+    height: '100%',
+    padding: rem(300),
+    [theme.fn.smallerThan('md')]: {
+      width: '100%',
+      padding: theme.spacing.xl,
+    },
   },
-  boldText: {
-    fontWeight: 800
+  toggleContentContainer: {
+    display: 'flex',
+    fontSize: rem(32),
+    fontWeight: 600,
+    marginBottom: rem(40),
   }
 }));
 
@@ -22,15 +42,34 @@ export default function LoginModal({opened, close}: LoginModalProps) {
   const { classes } = useStyles();
 
   return (
-    <Modal.Root opened={opened} onClose={close} size='xl'>
-    <Modal.Overlay />
-    <Modal.Content className={classes.content}>
-      <Modal.Header>
-        <Modal.Title className={classes.title}>Login</Modal.Title>
-        <Modal.CloseButton />
-      </Modal.Header>
+    <Modal.Root
+      opened={opened}
+      onClose={close}
+      fullScreen
+      padding={0}
+      transitionProps={{ transition: 'slide-down', duration: 200 }}
+      >
+    <Modal.Content style={{'padding': '0'}}>
       <Modal.Body>
-       hi
+       <div className={classes.inner}>
+        {/* close button */}
+        <div className={classes.closeBtn} onClick={close}>
+          <GrClose size={30}/>
+        </div>
+        {/* content container */}
+        <div className={classes.contentContainer}>
+          {/* toggle between sign up or log in */}
+          <div className={classes.toggleContentContainer}>
+            <Group spacing={rem(40)}>
+              <div>Sign up</div>
+              <div>Log in</div>
+            </Group>
+          </div>
+          {/* log in form */}
+          <LoginForm/>
+          {/* sign up form */}
+        </div>
+       </div>
       </Modal.Body>
     </Modal.Content>
   </Modal.Root>

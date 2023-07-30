@@ -9,10 +9,10 @@ export interface UsersState {
   user: User | null;
   loading: boolean;
   error: string;
-  fetchUser: (id: number) => Promise<void>;
+  fetchUser: (username: string) => Promise<void>;
   addUser: (user: User) => Promise<void>;
   updateUser: (user: User) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
-  login: (user: User) => Promise<void>;
+  login: (user: User | null) => Promise<void>;
   logout: () => void;
 }

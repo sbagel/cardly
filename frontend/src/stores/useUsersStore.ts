@@ -12,10 +12,10 @@ const useUsersStore = create<UsersState>((set) => {
     user: initialState,
     loading: false,
     error: "",
-    fetchUser: async (id: number) => {
+    fetchUser: async (username: string) => {
       set((state) => ({ ...state, loading: true }))
       try {
-        const res = await fetch(`${API_URL}/${id}`)
+        const res = await fetch(`${API_URL}/un/${username}`)
         const user = await res.json()
         set((state) => ({ ...state, error: "", user }))
       } catch (error) {
