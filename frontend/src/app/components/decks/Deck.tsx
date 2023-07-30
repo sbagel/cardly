@@ -4,6 +4,7 @@ import { createStyles, rem, NavLink} from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
 import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
 import DeleteDeckModal from "./DeleteDeckModal.tsx";
+import EditDeckModal from "./EditDeckModal.tsx";
 
 interface DeckProps {
   deck: Deck,
@@ -16,12 +17,12 @@ const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     border: `${rem(3)} solid black`,
     height: rem(180),
-    width: rem(250),
+    width: rem(280),
     borderRadius: rem(15),
     // overflow: 'hidden',
     cursor: 'pointer',
     position: 'relative',
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       flexDirection: 'row',
       width: '100%',
       height: rem(90),
@@ -32,7 +33,7 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     height: rem(80),
     overflow: 'hidden',
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       width: '10%',
       marginRight: rem(10)
     }
@@ -68,7 +69,9 @@ export default function Deck({deck, index}: DeckProps) {
 
   const { hovered, ref } = useHover();
 
-  const [opened, { open, close }] = useDisclosure(false);
+  const [openedDeleteModal, deleteHandler] = useDisclosure(false);
+  const [openedEditModal, editHandler] = useDisclosure(false);
+
 
   const colors = ['#e8e7fc', '#e7f8fc'];
 
@@ -76,18 +79,21 @@ export default function Deck({deck, index}: DeckProps) {
 
   return (
     <div className={classes.deck} ref={ref} >
-      <DeleteDeckModal deckId={deck.id} opened={opened} close={close}/>
+      <DeleteDeckModal deckId={deck.id} opened={openedDeleteModal} close={deleteHandler.close}/>
+      <EditDeckModal deck={deck} opened={openedEditModal} close={editHandler.close}/>
       {hovered &&
       <div className={classes.ellipsisContainer}>
         <NavLink component="div" className={classes.ellipsisIcon} childrenOffset={0} rightSection={<FaEllipsis size={20}/>}>
-          <NavLink component="div" className={classes.editCardLabel} icon={<FaPenToSquare size={15}/>} label="Rename deck" styles={{root: {backgroundColor: 'white'}}}/>
-          <NavLink component="div" onClick={open} className={classes.editCardLabel} icon={<FaTrashCan size={15}/>} label="Delete deck"styles={{root: {backgroundColor: 'white', zIndex: 20}}}/>
+          <NavLink component="div" onClick={editHandler.open} className={classes.editCardLabel} icon={<FaPenToSquare size={15}/>} label="Rename deck" styles={{root: {backgroundColor: 'white'}}}/>
+          <NavLink component="div" onClick={deleteHandler.open} className={classes.editCardLabel} icon={<FaTrashCan size={15}/>} label="Delete deck"styles={{root: {backgroundColor: 'white', zIndex: 20}}}/>
         </NavLink>
       </div>}
 
       <div className={classes.deckHeaderImg}>
-        <DeathStarPattern width={120} height={160} fill={color} />
-        <DeathStarPattern width={120} height={160} fill={color} />
+        <div style={{'zoom': '1.12', 'width': '100%'}}>
+          <DeathStarPattern width={120} height={160} fill={color} />
+          <DeathStarPattern width={120} height={160} fill={color} />
+        </div>
       </div>
       <div className={classes.deckName}>{deck.title}</div>
     </div>

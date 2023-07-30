@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       display: 'block',
       marginLeft: rem(-15),
       width: '105%',
@@ -27,7 +27,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       display: 'block',
       marginTop: rem(-30)
     }
@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
     width: '50%',
     height: rem(80),
     display: 'flex',
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       width: '100%',
       height: rem(60),
     }
@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
     width: rem(150),
     marginRight: rem(10),
     height: rem(80),
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       width: '100%',
       height: rem(20),
       zIndex: 10
@@ -68,6 +68,11 @@ const useStyles = createStyles((theme) => ({
   wideContainer: {
     width: '100%',
   },
+  addBtn: {
+    [theme.fn.smallerThan('md')]: {
+      display: 'none'
+    }
+  }
 }));
 
 export default function UserDecks() {
@@ -124,15 +129,15 @@ export default function UserDecks() {
         </div>
       </Container>
       {/* add deck */}
-      <Container className={classes.wideContainer} mb={20}>
-        <Button color="dark" radius="xl" size="md" leftIcon={<FaPlus />} onClick={open}>
+      <Container className={classes.wideContainer} mb={20} mt={20}>
+        <Button color="dark" radius="xl" size="md" leftIcon={<FaPlus />} onClick={open} className={classes.addBtn}>
           Add
         </Button>
       </Container>
       {/* display decks */}
       <Container className={classes.wideContainer}>
         {error && <p>{error}</p>}
-        <Group>
+        <Group position="apart">
         {loading &&
           <Deck deck={loadingDeck} index={0}/>
         }
