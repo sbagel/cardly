@@ -5,6 +5,7 @@ const API_URL = "http://localhost:8080/api/deck";
 
 const useDeckStore = create<DecksState>((set) => ({
   decks: [],
+  titles: [],
   currentDeck: {
     id: 0,
     userID: 0,
@@ -20,6 +21,24 @@ const useDeckStore = create<DecksState>((set) => ({
       const res = await fetch(`${API_URL}/all?userId=${userId}`);
       const decks = await res.json();
       set((state) => ({ ...state, error: "", decks }));
+    } catch (error) {
+      set((state) => ({
+        ...state,
+        error: error.message,
+      }));
+    } finally {
+      set((state) => ({
+        ...state,
+        loading: false,
+      }));
+    }
+  },
+  fetchDeckTitles: async (userId: number) => {
+    set((state) => ({ ...state, loading: true }));
+    try {
+      const res = await fetch(`${API_URL}/all/titles?userId=${userId}`);
+      const titles = await res.json();
+      set((state) => ({ ...state, error: "", titles }));
     } catch (error) {
       set((state) => ({
         ...state,

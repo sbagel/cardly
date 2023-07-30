@@ -27,16 +27,20 @@ interface DeckModalProps {
 
 export default function AddDeckModal({opened, close}: DeckModalProps) {
   const [debounced] = useDebouncedValue(opened, 200);
-  const { addDeck } = useDecksFacade()
+  const { titles, addDeck, fetchDeckTitles } = useDecksFacade()
   const { classes } = useStyles();
 
   const form = useForm({
     initialValues: { id: 0, userID: 1, title: '', description: '', visible: false},
 
     validate: {
-      title: (value) => (value.trim().length < 1 ? 'Deck name is empty' : null),
+      title: (value) => (value.trim().length < 1 ? 'Deck name is empty' : titles.includes(value) ? 'You have already a deck with this title' : null),
     },
   });
+
+  useEffect(() => {
+    fetchDeckTitles(1)
+  }, [])
 
   useEffect(()=>{
     form.setFieldValue('title', '');
