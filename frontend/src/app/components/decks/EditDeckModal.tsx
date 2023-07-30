@@ -31,7 +31,7 @@ export default function EditDeckModal({deck, opened, close}: DeckModalProps) {
   const originalTitle = deck.title;
   const [debounced] = useDebouncedValue(opened, 200);
   const [debouncedDeck] = useDebouncedValue(deck, 200);
-  const { updateDeck } = useDecksFacade()
+  const { updateDeck, fetchDeckTitles } = useDecksFacade()
   const { classes } = useStyles();
 
   const form = useForm({
@@ -48,7 +48,10 @@ export default function EditDeckModal({deck, opened, close}: DeckModalProps) {
   }, [debounced])
 
   useEffect(() => {
-    if (deck !== debouncedDeck) close()
+    if (deck !== debouncedDeck) {
+      fetchDeckTitles(1)
+      close()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deck])
 
