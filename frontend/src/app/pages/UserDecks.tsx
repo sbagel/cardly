@@ -92,6 +92,7 @@ export default function UserDecks() {
     id: 0,
     userID: 0,
     title: "Loading....",
+    description: '',
     visible: false,
   }
 
@@ -143,9 +144,16 @@ export default function UserDecks() {
         }
         {
           decks?.length > 0 && (
-            decks.map((deck, index) => (
-              <Deck deck={deck} index={index} key={`deckkey-${deck.id}`}/>
-            ))
+            decks
+              .filter((deck) => {
+                if (query.trim() === '') {
+                  return true;
+                }
+                return deck.title.toLowerCase().includes(query.toLowerCase())
+              })
+              .map((deck, index) => (
+                <Deck deck={deck} index={index} key={`deckkey-${deck.id}`}/>
+              ))
           )
         }
         </Group>
