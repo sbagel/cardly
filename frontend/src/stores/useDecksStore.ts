@@ -116,9 +116,9 @@ const useDeckStore = create<DecksState>((set) => ({
         set((state) => ({
           ...state,
           error: "",
-          currentDeck: state.decks[1],
-          titles: state.titles.filter((d) => d !== title),
           decks: state.decks.filter((d) => d.id !== id),
+          titles: state.titles.filter((d) => d !== title),
+          currentDeck: state.decks[0].title == title ? state.decks[1] : state.decks[0],
         }));
       } else {
         throw new Error("Deletion failed.");
