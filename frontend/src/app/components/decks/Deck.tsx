@@ -94,7 +94,7 @@ export default function Deck({deck, index}: DeckProps) {
 
   return (
     <div className={classes.inner} ref={ref}>
-      <DeleteDeckModal deckId={deck.id} opened={openedDeleteModal} close={deleteHandler.close}/>
+      <DeleteDeckModal deckId={deck.id} title={deck.title} opened={openedDeleteModal} close={deleteHandler.close}/>
       <EditDeckModal deck={deck} opened={openedEditModal} close={editHandler.close}/>
       {hovered &&
       <div className={classes.ellipsisContainer}>

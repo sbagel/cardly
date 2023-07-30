@@ -16,6 +16,6 @@ export interface DecksState {
   fetchDeckTitles: (userId: number) => Promise<void>;
   addDeck: (deck: Deck) => Promise<void>;
   updateDeck: (deck: Deck) => Promise<void>;
-  deleteDeck: (id: number) => Promise<void>;
+  deleteDeck: (id: number, title: string) => Promise<void>;
   selectDeck: (deck: Deck) => Promise<void>;
 }

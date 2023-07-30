@@ -106,7 +106,7 @@ const useDeckStore = create<DecksState>((set) => ({
       }));
     }
   },
-  deleteDeck: async (id: number) => {
+  deleteDeck: async (id: number, title: string) => {
     set((state) => ({ ...state, loading: true, error: "" }));
     try {
       const res = await fetch(`${API_URL}/${id}`, {
@@ -116,6 +116,8 @@ const useDeckStore = create<DecksState>((set) => ({
         set((state) => ({
           ...state,
           error: "",
+          currentDeck: state.decks[1],
+          titles: state.titles.filter((d) => d !== title),
           decks: state.decks.filter((d) => d.id !== id),
         }));
       } else {

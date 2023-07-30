@@ -21,11 +21,12 @@ const useStyles = createStyles(() => ({
 
 interface DeckModalProps {
   deckId: number;
+  title: string;
   opened: boolean;
   close: () => void;
 }
 
-export default function DeleteDeckModal({deckId, opened, close}: DeckModalProps) {
+export default function DeleteDeckModal({deckId, title, opened, close}: DeckModalProps) {
   const { deleteDeck } = useDecksFacade()
   const { classes } = useStyles();
 
@@ -40,7 +41,7 @@ export default function DeleteDeckModal({deckId, opened, close}: DeckModalProps)
 
         <div className={classes.btnContainer}>
           <Box w={180} mr={20}>
-            <Button onClick={() => deleteDeck(deckId)} color="dark" radius="xl" size="lg" fullWidth>
+            <Button onClick={() => deleteDeck(deckId, title)} color="dark" radius="xl" size="lg" fullWidth>
               Confirm
             </Button>
           </Box>
