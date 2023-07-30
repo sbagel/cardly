@@ -62,7 +62,7 @@ const useDeckStore = create<DecksState>((set) => ({
         body: JSON.stringify(deck),
       });
       const newDeck = await res.json();
-      set((state) => ({ ...state, error: "", decks: [newDeck, ...state.decks] }));
+      set((state) => ({ ...state, error: "", currentDeck: newDeck, decks: [newDeck, ...state.decks] }));
     } catch (error) {
       set((state) => ({
         ...state,

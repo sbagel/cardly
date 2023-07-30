@@ -40,6 +40,7 @@ export default function AddDeckModal({opened, close}: DeckModalProps) {
 
   useEffect(() => {
     fetchDeckTitles(1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(()=>{
