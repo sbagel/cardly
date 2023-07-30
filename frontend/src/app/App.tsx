@@ -8,7 +8,6 @@ import UserDecks from './pages/UserDecks';
 import NotFound from "./pages/NotFound";
 import Header from './components/Header.tsx'
 import SelectedDeck from './pages/SelectedDeck.tsx';
-import { AuthProvider } from '../context/AuthContext.tsx';
 import './index.css';
 
 const router = createBrowserRouter(
@@ -27,7 +26,6 @@ const router = createBrowserRouter(
     // const systemScheme = useColorScheme();
 
     return (
-      <AuthProvider>
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
@@ -40,7 +38,6 @@ const router = createBrowserRouter(
           }}>
           <RouterProvider router={router}/>
         </MantineProvider>
-      </AuthProvider>
     );
   }
 

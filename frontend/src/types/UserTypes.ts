@@ -6,11 +6,13 @@ export interface User {
 }
 
 export interface UsersState {
-  user: User;
+  user: User | null;
   loading: boolean;
   error: string;
-  fetchUsers: (id: number) => Promise<void>;
+  fetchUser: (id: number) => Promise<void>;
   addUser: (user: User) => Promise<void>;
   updateUser: (user: User) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
+  login: (user: User) => Promise<void>;
+  logout: () => void;
 }

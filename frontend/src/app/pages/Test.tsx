@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { Outlet, Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
-import { useAuth } from "../../hooks/useAuth";
 import useUsersFacade from "../facades/useUsersFacade";
 
 function Test() {
-  const { user, login, logout } = useAuth();
-  // const { user, loading, error, fetchUsers } = useUsersFacade();
+  // const { user, login, logout } = useAuth();
+  const { user, loading, error, fetchUser, login, logout } = useUsersFacade();
 
   // useEffect(() => {
-  //   fetchUsers(1);
+  //   fetchUser(1);
   // }, []);
 
   useEffect(() => {
