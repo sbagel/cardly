@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { createStyles, Container, Text, rem } from '@mantine/core';
-import useCardsFacade from '../../../facades/useCardsFacade';
-import Card from '../Card.tsx';
+import useDecksFacade from "../../facades/useDecksFacade.ts";
+import useCardsFacade from '../../facades/useCardsFacade.ts';
+import Card from './Card.tsx';
 
 const useStyles = createStyles(() => ({
   inner: {
@@ -10,12 +11,14 @@ const useStyles = createStyles(() => ({
 }));
 
 export default function RecentlyAddedCards() {
+  const { currentDeck } = useDecksFacade();
   const { cards, loading, error, fetchCards } = useCardsFacade();
   const { classes } = useStyles();
 
   useEffect(() => {
-    fetchCards(1);
-  }, [fetchCards]);
+    fetchCards(currentDeck.id ? currentDeck.id : 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentDeck]);
 
   return (
     <Container className={classes.inner} mb={60}>

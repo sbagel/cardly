@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { createStyles, rem, TextInput, Modal} from '@mantine/core';
+import { createStyles, rem, TextInput, Modal, NavLink} from '@mantine/core';
 import { useInputState } from '@mantine/hooks';
 import { FaSearch } from 'react-icons/fa';
 import useDecksFacade from '../../facades/useDecksFacade';
@@ -22,13 +22,13 @@ interface DeckModalProps {
 export default function DeckModal({opened, close}: DeckModalProps) {
   const { classes } = useStyles();
 
-  const { decks } = useDecksFacade();
+  const { currentDeck, decks, selectDeck } = useDecksFacade();
 
   const [query, setQuery] = useInputState('');
 
   useEffect(() => {
-
-  })
+    console.log('changed current', currentDeck)
+  }, [currentDeck])
 
   return (
       <Modal.Root opened={opened} onClose={close} size='xl'>
@@ -46,12 +46,20 @@ export default function DeckModal({opened, close}: DeckModalProps) {
                   onChange={setQuery}
                   radius="md"
                   size="xl"
+                  mb={10}
                 />
 
               {decks?.length > 0 && (
-                decks.map((deck) => (
-                  deck.title
-                ))
+                decks
+                  .filter((deck) => {
+                    if (query.trim() === '') {
+                      return true;
+                    }
+                    return deck.title.toLowerCase().includes(query.toLowerCase())
+                  })
+                  .map((deck) => (
+                    <NavLink NavLink onClick={() => {selectDeck(deck); close()}} label={deck.title} styles={{label: {fontWeight: 500, fontSize: rem(18)}}}></NavLink>
+                  ))
               )}
           </Modal.Body>
         </Modal.Content>

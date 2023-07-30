@@ -3,6 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { FaAngleDown } from 'react-icons/fa';
 import CardForm from "./CardForm";
 import ChooseDeckModal from "../../decks/ChooseDeckModal";
+import useDecksFacade from '../../../facades/useDecksFacade';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -53,7 +54,9 @@ export default function QuickAdd() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const deckName = 'My First Deck';
+  const { currentDeck } = useDecksFacade();
+
+  const deckName = currentDeck.title.length > 0 ? currentDeck.title : 'My First Deck';
 
   return (
     <Container className={classes.inner} mb={60}>

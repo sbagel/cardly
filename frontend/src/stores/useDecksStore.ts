@@ -7,8 +7,9 @@ const useDeckStore = create<DecksState>((set) => ({
   decks: [],
   currentDeck: {
     id: 0,
-    userId: 0,
+    userID: 0,
     title: '',
+    description: '',
     visible: false,
   },
   loading: false,
