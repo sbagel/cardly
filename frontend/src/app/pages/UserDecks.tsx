@@ -85,7 +85,7 @@ export default function UserDecks() {
 
   const loadingDeck = {
     id: 0,
-    userId: 0,
+    userID: 0,
     title: "Loading....",
     visible: false,
   }
@@ -131,11 +131,11 @@ export default function UserDecks() {
       </Container>
       {/* display decks */}
       <Container className={classes.wideContainer}>
+        {error && <p>{error}</p>}
+        <Group>
         {loading &&
           <Deck deck={loadingDeck} index={0}/>
         }
-        {error && <p>{error}</p>}
-        <Group>
         {
           decks?.length > 0 && (
             decks.map((deck, index) => (
