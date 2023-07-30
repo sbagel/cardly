@@ -46,9 +46,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function QuickAdd() {
-
   const { classes } = useStyles();
-
   const [opened, { open, close }] = useDisclosure(false);
 
   const { currentDeck } = useDecksFacade();
@@ -68,9 +66,6 @@ export default function QuickAdd() {
           </div>
         </div>
         <CardForm/>
-        {/* <div>
-          <button>enter</button>
-        </div> */}
       </div>
     </Container>
   )

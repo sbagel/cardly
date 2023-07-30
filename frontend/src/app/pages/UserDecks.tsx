@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { createStyles, Container, NavLink, TextInput, rem, Group, Button} from '@mantine/core';
-import { FaSearch } from 'react-icons/fa';
-import { useInputState, useDisclosure } from '@mantine/hooks';
+
+import useUsersFacade from '../facades/useUsersFacade';
 import useDecksFacade from '../facades/useDecksFacade';
-import Deck from '../components/decks/Deck';
+
+import { useInputState, useDisclosure } from '@mantine/hooks';
+
+import { FaSearch } from 'react-icons/fa';
 import { HiChevronRight } from "react-icons/hi";
 import { FaPlus } from 'react-icons/fa';
+
+import Deck from '../components/decks/Deck';
 import AddDeckModal from '../components/decks/AddDeckModal';
 
 const useStyles = createStyles((theme) => ({
@@ -76,8 +83,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function UserDecks() {
-  const { classes } = useStyles();
+  const navigate = useNavigate();
 
+  const { classes } = useStyles();
+  const { user, checkStorage } = useUsersFacade();
   const { decks, loading, error, fetchDecks } = useDecksFacade();
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -85,8 +94,13 @@ export default function UserDecks() {
   const [query, setQuery] = useInputState('');
 
   useEffect(() => {
-    fetchDecks(1);
-  }, [fetchDecks]);
+    checkStorage();
+
+    !user && navigate('/');
+
+    user && fetchDecks(user.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loadingDeck = {
     id: 0,

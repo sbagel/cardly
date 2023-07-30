@@ -16,7 +16,10 @@ export default function RecentlyAddedCards() {
   const { classes } = useStyles();
 
   useEffect(() => {
-    fetchCards(currentDeck.id ? currentDeck.id : 1);
+    if (currentDeck.id) {
+      fetchCards(currentDeck.id)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDeck]);
 

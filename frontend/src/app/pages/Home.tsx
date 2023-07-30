@@ -11,13 +11,13 @@ export default function Home() {
   const [debounced] = useDebouncedValue(user, 200);
   const { fetchDecks } = useDecksFacade();
 
-
   useEffect(()=>{
     checkStorage();
 
     if (user !== debounced && user) {
-      login(user)
-      navigate('/add')
+      login(user);
+      navigate('/add');
+      fetchDecks(user.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
