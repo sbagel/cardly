@@ -3,6 +3,7 @@ import { createStyles, keyframes, Header, Container, Group, Burger, rem } from '
 import { useDisclosure } from '@mantine/hooks';
 import { FaPlus, FaLightbulb, FaBell, FaUser } from 'react-icons/fa';
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 import ToggleHeader from './ToggleHeader';
 
 const HEADER_HEIGHT = rem(84);
@@ -91,6 +92,7 @@ function ItemTemplate({ icon, url, label }: LinkProps) {
 }
 
 export default function DoubleHeader() {
+  const { user } = useAuth();
   const location = useLocation();
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();

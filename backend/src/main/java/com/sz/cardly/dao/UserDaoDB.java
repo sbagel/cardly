@@ -25,6 +25,16 @@ public class UserDaoDB implements UserDao{
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        try {
+            final String sql = "SELECT * FROM User WHERE Username = ?";
+            return jdbc.queryForObject(sql, new UserMapper(), username);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<User> getAllUsers() {
         final String sql = "SELECT * FROM User";
 

@@ -1,16 +1,33 @@
 import { useEffect } from "react";
 import { Outlet, Link } from 'react-router-dom';
+import { Button } from '@mantine/core';
+import { useAuth } from "../../hooks/useAuth";
 import useUsersFacade from "../facades/useUsersFacade";
 
 function Test() {
+  const { user, login, logout } = useAuth();
+  // const { user, loading, error, fetchUsers } = useUsersFacade();
 
-  const { user, loading, error, fetchUsers } = useUsersFacade();
+  // useEffect(() => {
+  //   fetchUsers(1);
+  // }, []);
 
   useEffect(() => {
-    fetchUsers(1);
-  }, []);
+    console.log('user', user)
+  }, [user])
 
-  // console.log("User ID:", user.id);
+  const handleLogin = () => {
+    login({
+      id: 1,
+      username: 'hi',
+      name: 'there',
+      photo: 'url'
+    })
+  };
+
+  const handleLogout = () => {
+    logout()
+  };
 
 
   return (
@@ -20,6 +37,8 @@ function Test() {
     <br></br>
     <br></br>
     <br></br>
+      <Button onClick={handleLogin}>login</Button>
+      <Button onClick={handleLogout}>logout</Button>
       <div className="Test">
         Test! <Link to="/add">add</Link>
       </div>

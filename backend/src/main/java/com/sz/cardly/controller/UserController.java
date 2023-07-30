@@ -23,6 +23,11 @@ public class UserController {
         return userService.getUserByID(id);
     }
 
+    @GetMapping("/un/{username}")
+    public User getUserByUsername(@PathVariable("username") String username){
+        return userService.getUserByUsername(username);
+    }
+
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
