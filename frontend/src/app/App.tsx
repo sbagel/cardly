@@ -1,6 +1,7 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
+import Home from './pages/Home.tsx';
 import Test from "./pages/Test";
 import Add from "./pages/Add";
 import UserDecks from './pages/UserDecks';
@@ -12,7 +13,8 @@ import './index.css';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Header/>}>
-      <Route index element={<Test />} />
+      <Route index element={<Home />} />
+      <Route path="test" element={<Test />} />
       <Route path="add" element={<Add />} />
       <Route path="decks" element={<UserDecks />} />
       <Route path="decks/:deckId" element={<SelectedDeck />} />

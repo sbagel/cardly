@@ -46,15 +46,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  userDropdownContainer: {
-    display: 'block',
-    backgroundColor: 'blue',
-    height: rem(40),
-    widht: rem(80),
-    position: 'absolute',
-    bottom: 0
-  },
-
   mainLinks: {
     marginRight: `calc(${theme.spacing.sm} * -1)`,
   },
@@ -79,6 +70,17 @@ const useStyles = createStyles((theme) => ({
       transform: 'scale(1.1)'
     },
   },
+
+  unknownUser: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[9],
+    fontSize: rem(20),
+    fontWeight: 700,
+    padding: `${rem(7)} ${theme.spacing.sm}`,
+    marginRight: 30,
+  }
 
 }));
 
@@ -112,31 +114,41 @@ export default function DoubleHeader() {
 
   return (
     <>
+    {user && (
       <Header height={HEADER_HEIGHT} mb={20}>
         <Container className={classes.inner}>
           <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
           <div className={classes.links}>
-              {user && (
-                <Group spacing={0} position="right" className={classes.mainLinks}>
-                  <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
-                  <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
-                  <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
-                  <Menu transitionProps={{ transition: 'pop' }} offset={0}>
-                    <Menu.Target>
-                    <div className={classes.mainLink}><FaUser/></div>
-                    </Menu.Target>
-                    <Menu.Dropdown>
-                      <Menu.Item onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
+            <Group spacing={0} position="right" className={classes.mainLinks}>
+              <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
+              <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
+              <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
+              <Menu transitionProps={{ transition: 'pop' }} offset={0}>
+                <Menu.Target>
+                <div className={classes.mainLink}><FaUser/></div>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Item onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
 
-                      {/* <Menu.Divider /> */}
-                    </Menu.Dropdown>
-                  </Menu>
+                  {/* <Menu.Divider /> */}
+                </Menu.Dropdown>
+              </Menu>
+            </Group>
+
+              {/* {!user && (
+                <Group spacing={0} position="right" className={classes.mainLinks}>
+                  <Link to="/login" className={classes.unknownUser}>Log in</Link>
+                  <Link to="/" className={classes.unknownUser} style={{'backgroundColor': '#F0F073', 'border': `${rem(3)} solid black`}}>
+                    Get started
+                  </Link>
                 </Group>
-              )}
+              )
+              } */}
           </div>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
         </Container>
       </Header>
+      )}
       {!deckName && user && <ToggleHeader/>}
       <Outlet/>
     </>
