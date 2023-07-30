@@ -30,6 +30,12 @@ public class DeckDaoDB implements DeckDao{
     }
 
     @Override
+    public List<String> getAllDeckTitlesByUserId(int userId) {
+        final String sql = "SELECT title FROM Deck WHERE UserID = ?";
+        return jdbc.queryForList(sql, String.class, userId);
+    }
+
+    @Override
     public List<Deck> getAllDecks() {
         final String sql = "SELECT * FROM Deck";
         return jdbc.query(sql, new DeckMapper());

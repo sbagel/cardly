@@ -24,6 +24,11 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
+    public List<String> getAllDeckTitlesByUserId(int userId) {
+        return deckDao.getAllDeckTitlesByUserId(userId);
+    }
+
+    @Override
     public List<Deck> getAllDecks() {
         return deckDao.getAllDecks();
     }

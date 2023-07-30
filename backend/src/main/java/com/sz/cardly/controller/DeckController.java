@@ -19,6 +19,11 @@ public class DeckController {
         return deckService.getAllDecksByUserId(userId);
     }
 
+    @GetMapping("/all/titles")
+    public List<String> getAllDeckTitlesByUserId(@RequestParam("userId") int userId) {
+        return deckService.getAllDeckTitlesByUserId(userId);
+    }
+
     @GetMapping("/{id}")
     public Deck getDeckById(@PathVariable("id") int id) {
         return deckService.getDeckByID(id);
