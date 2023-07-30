@@ -138,7 +138,7 @@ export default function UserDecks() {
       {/* display decks */}
       <Container className={classes.wideContainer}>
         {error && <p>{error}</p>}
-        <Group position="apart">
+        <Group spacing="xl">
         {loading &&
           <Deck deck={loadingDeck} index={0}/>
         }
