@@ -1,6 +1,7 @@
 import { createStyles, Header, Container, Group, rem } from '@mantine/core';
-import { useHover } from '@mantine/hooks';
+import { useHover, useDisclosure } from '@mantine/hooks';
 import {  Link } from 'react-router-dom';
+import LoginModal from './loginModal';
 
 const HEADER_HEIGHT = rem(84);
 
@@ -56,16 +57,20 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function LoginHeader() {
+  const [opened, { open, close }] = useDisclosure(false);
   const { classes } = useStyles();
   const { hovered, ref } = useHover();
 
   return (
+    <>
     <Header height={HEADER_HEIGHT} mb={20}>
       <Container className={classes.inner}>
           <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
           <div className={classes.links}>
             <Group spacing={0} position="right" className={classes.mainLinks}>
-                <Link to="/login" className={classes.unknownUser}><span className={classes.unknownUserLink}>Log in</span></Link>
+                <div className={classes.unknownUser} onClick={open}>
+                  <span className={classes.unknownUserLink}>Log in</span>
+                </div>
                 <div ref={ref} className={classes.unknownUser} style={{'backgroundColor': hovered? '#e9e930' : '#F0F073', 'border': `${rem(3)} solid black`, 'transform': hovered? 'scale(1.01)' : 'scale(1)', 'transition': 'background-color 100ms ease, transform 100ms ease'}}>
                   <Link to="/" style={{'color':'black'}}>Get started </Link>
                 </div>
@@ -73,5 +78,7 @@ export default function LoginHeader() {
           </div>
       </Container>
     </Header>
+    <LoginModal opened={opened} close={close}/>
+    </>
   )
 }
