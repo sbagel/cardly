@@ -112,7 +112,7 @@ export default function UserDecks() {
 
   return (
     <Container className={classes.inner} mb={60}>
-      <AddDeckModal opened={opened} close={close}/>
+      <AddDeckModal opened={opened} close={close} user={user}/>
       <Container className={classes.deckOrderContainer}>
         {/* sort by recent/created or folder */}
         <div className={classes.itemBox}>

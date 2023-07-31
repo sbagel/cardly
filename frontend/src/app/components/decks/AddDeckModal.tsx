@@ -3,6 +3,7 @@ import { createStyles, rem, TextInput, Modal, Button, Box} from '@mantine/core';
 import { useDebouncedValue } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import useDecksFacade from '../../facades/useDecksFacade';
+import { User } from "../../../types/UserTypes";
 
 const useStyles = createStyles(() => ({
   content: {
@@ -23,16 +24,17 @@ const useStyles = createStyles(() => ({
 interface DeckModalProps {
   opened: boolean;
   close: () => void;
+  user: User;
 }
 
-export default function AddDeckModal({opened, close}: DeckModalProps) {
+export default function AddDeckModal({opened, close, user}: DeckModalProps) {
   const [ debounced ] = useDebouncedValue(opened, 200);
   const { titles, currentDeck, addDeck } = useDecksFacade();
   const [ debouncedCurrent ] = useDebouncedValue(currentDeck, 200);
   const { classes } = useStyles();
 
   const form = useForm({
-    initialValues: { id: 0, userID: 1, title: '', description: '', visible: false},
+    initialValues: { id: 0, userID: user.id, title: '', description: '', visible: false},
 
     validate: {
       title: (value) => (value.trim().length < 1 ? 'Deck name is empty' : titles.includes(value) ? 'You have already a deck with this title' : null),
@@ -49,6 +51,16 @@ export default function AddDeckModal({opened, close}: DeckModalProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDeck])
 
+  const handleSubmit = () => {
+    addDeck({
+      id: 0,
+      userID: user.id,
+      title: form.values.title,
+      description: '',
+      visible: false
+    })
+  }
+
 
   return (
     <Modal.Root opened={opened} onClose={close} size='xl'>
@@ -59,7 +71,7 @@ export default function AddDeckModal({opened, close}: DeckModalProps) {
         <Modal.CloseButton />
       </Modal.Header>
       <Modal.Body>
-        <form onSubmit={form.onSubmit(addDeck)}>
+        <form onSubmit={form.onSubmit(handleSubmit)}>
         <TextInput
             label="New deck name"
             placeholder="Type deck name"
