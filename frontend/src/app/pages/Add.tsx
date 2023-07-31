@@ -10,7 +10,7 @@ import useCardsFacade from '../facades/useCardsFacade.ts';
 export default function Add() {
   const navigate = useNavigate();
   const { user, checkStorage } = useUsersFacade();
-  const { currentDeck, fetchDecks } = useDecksFacade();
+  const { currentDeck, decks, fetchDecks } = useDecksFacade();
   const { fetchCards } = useCardsFacade();
 
   useEffect(()=>{

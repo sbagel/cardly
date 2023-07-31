@@ -11,8 +11,18 @@ const useStyles = createStyles(() => ({
 }));
 
 export default function RecentlyAddedCards() {
-  const { cards, loading, error } = useCardsFacade();
+  const { cards, loading, error, fetchCards } = useCardsFacade();
   const { classes } = useStyles();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const parsedStoredUser = JSON.parse(storedUser);
+      parsedStoredUser.id ? fetchCards(parsedStoredUser.id) : null;
+    }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <Container className={classes.inner} mb={60}>
