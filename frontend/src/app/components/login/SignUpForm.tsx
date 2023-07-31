@@ -64,7 +64,6 @@ export default function SignUpForm() {
               styles={{
                 root: {marginTop: rem(20)},
                 label: {marginBottom: rem(10), fontWeight: 600},
-                // input: {fontSize: rem(22), fontWeight: 600}
               }}
             />
           {/* username */}
@@ -84,6 +83,7 @@ export default function SignUpForm() {
             {/* password */}
             <PasswordInput
               label="Password"
+              required
               placeholder="Type your password"
               radius="md"
               size="xl"
