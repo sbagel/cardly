@@ -47,7 +47,6 @@ export default function Folder({folder}:FolderProps) {
 
   return (
     <Paper
-      onClick={() => navigate(`${folder.id}?folderName=${folder.folderName.replace(/\s+/g, "_")}`,{state: {folder: folder, return: '/folders'}})}
       shadow="xs"
       mb={10}
       sx={{ width: '100%', position: 'relative' }}
@@ -65,7 +64,9 @@ export default function Folder({folder}:FolderProps) {
       </div>
       }
 
-      <Box ref={folderIconHover.ref}>
+      <Box
+        onClick={() => navigate(`${folder.id}?folderName=${folder.folderName.replace(/\s+/g, "_")}`,{state: {folder: folder}})}
+        ref={folderIconHover.ref}>
         <NavLink
           icon={folderIconHover.hovered ? <FcOpenedFolder/> : <FcFolder/>}
           label={folder.folderName}
