@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { FaAngleDown } from 'react-icons/fa';
 import CardForm from "./CardForm";
 import ChooseDeckModal from "../../decks/ChooseDeckModal";
-import useDecksFacade from '../../../facades/useDecksFacade';
 import { Deck } from '../../../../types/DeckTypes';
 
 const useStyles = createStyles((theme) => ({

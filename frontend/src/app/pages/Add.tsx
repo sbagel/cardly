@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useShallowEffect } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 import QuickAdd from '../components/cards/quick_add/QuickAdd.tsx';
 import RecentlyAddedCards from '../components/cards/RecentlyAddedCards.tsx';

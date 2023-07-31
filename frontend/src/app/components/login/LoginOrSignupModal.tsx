@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { createStyles, rem, Modal, Group} from '@mantine/core';
 import { GrClose } from "react-icons/gr";
 import LoginForm from './LoginForm';

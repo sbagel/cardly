@@ -4,10 +4,12 @@ import { MantineProvider } from '@mantine/core';
 import Home from './pages/Home.tsx';
 import Test from "./pages/Test";
 import Add from "./pages/Add";
+import UserFolders from './pages/UserFolders.tsx';
 import UserDecks from './pages/UserDecks';
+import SelectedDeck from './pages/SelectedDeck.tsx';
 import NotFound from "./pages/NotFound";
 import Header from './components/Header.tsx'
-import SelectedDeck from './pages/SelectedDeck.tsx';
+
 import './index.css';
 
 const router = createBrowserRouter(
@@ -18,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="add" element={<Add />} />
       <Route path="decks" element={<UserDecks />} />
       <Route path="decks/:deckId" element={<SelectedDeck />} />
+      <Route path="folders" element={<UserFolders />} />
       <Route path='*' element={<NotFound />}/>
     </Route>
   )

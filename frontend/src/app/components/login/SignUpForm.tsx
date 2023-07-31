@@ -1,8 +1,6 @@
 import { useForm } from '@mantine/form';
 import { createStyles, Box, rem, TextInput, Button, PasswordInput} from '@mantine/core';
-
 import useUsersFacade from '../../facades/useUsersFacade';
-import useDecksFacade from '../../facades/useDecksFacade';
 
 const useStyles = createStyles(() => ({
   content: {
@@ -25,7 +23,6 @@ const useStyles = createStyles(() => ({
 export default function SignUpForm() {
   const { classes } = useStyles();
   const { addUser } = useUsersFacade();
-  const { addDeck } = useDecksFacade();
 
   const form = useForm({
     initialValues: { id: 0, username: '', name: '', photo: ''},
