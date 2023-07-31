@@ -54,7 +54,8 @@ const useStyles = createStyles((theme) => ({
   deckName: {
     padding: theme.spacing.md,
     fontSize: rem(20),
-    fontWeight: 600
+    fontWeight: 600,
+    textTransform: 'capitalize'
   },
   ellipsisContainer:{
     position: 'absolute',

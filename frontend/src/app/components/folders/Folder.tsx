@@ -44,7 +44,7 @@ export default function Folder({folder}:FolderProps) {
   const [openedEditModal, editHandler] = useDisclosure(false);
 
   return (
-    <Paper shadow="xs" sx={{ width: '100%', position: 'relative' }} radius="lg" ref={folderEditHover.ref}>
+    <Paper shadow="xs" mb={10} sx={{ width: '100%', position: 'relative' }} radius="lg" ref={folderEditHover.ref}>
       <DeleteFolderModal folderId={folder.id} opened={openedDeleteModal} close={deleteHandler.close}/>
       <EditFolderModal folder={folder} opened={openedEditModal} close={editHandler.close}/>
 
@@ -68,7 +68,8 @@ export default function Folder({folder}:FolderProps) {
               borderRadius: rem(20)
             },
             label: {
-              fontSize: rem(20)
+              fontSize: rem(20),
+              textTransform: 'capitalize'
             }
           }}
         />
