@@ -36,6 +36,16 @@ public class DeckDaoDB implements DeckDao{
     }
 
     @Override
+    public List<Deck> getDecksByFolderId(int folderId) {
+        try {
+            final String sql = "SELECT DISTINCT d.* FROM deck d INNER JOIN folderdeck fd ON d.deckID = fd.deckID WHERE fd.FolderID = ?";
+            return jdbc.query(sql, new DeckMapper(), folderId);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<Deck> getAllDecks() {
         final String sql = "SELECT * FROM Deck";
         return jdbc.query(sql, new DeckMapper());

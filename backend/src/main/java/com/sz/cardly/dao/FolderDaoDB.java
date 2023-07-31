@@ -25,6 +25,26 @@ public class FolderDaoDB implements FolderDao {
     }
 
     @Override
+    public List<Folder> getAllFoldersByUserId(int userID) {
+        try {
+            final String sql = "SELECT * FROM Folder WHERE UserID = ? ORDER BY lastViewDate DESC";
+            return jdbc.query(sql, new FolderMapper(), userID);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Folder> getAllFoldersByDeckId(int deckID) {
+        try {
+            final String sql = "SELECT DISTINCT f.* FROM folder f INNER JOIN folderdeck fd ON f.folderID = fd.folderID WHERE fd.DeckID = ?";
+            return jdbc.query(sql, new FolderMapper(), deckID);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<Folder> getAllFolders() {
         final String sql = "SELECT * FROM Folder";
         return jdbc.query(sql, new FolderMapper());
@@ -44,6 +64,21 @@ public class FolderDaoDB implements FolderDao {
         int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         folder.setId(id);
         return folder;
+    }
+
+    @Override
+    public boolean addDeckToFolder(int folderID, int deckID) {
+        final String deleteSql = "DELETE FROM folderdeck WHERE DeckID = ?";
+        final String insertSql = "INSERT INTO folderdeck (FolderID, DeckID) VALUES (?, ?)";
+        try {
+            jdbc.update(deleteSql, deckID);
+            if (folderID != 0) {
+                jdbc.update(insertSql, folderID, deckID);
+            }
+            return true;
+        } catch (DataAccessException ex) {
+            return false;
+        }
     }
 
     @Override

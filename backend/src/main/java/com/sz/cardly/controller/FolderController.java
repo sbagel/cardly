@@ -1,6 +1,7 @@
 package com.sz.cardly.controller;
 
 import com.sz.cardly.entities.Folder;
+import com.sz.cardly.entities.FolderDeck;
 import com.sz.cardly.service.FolderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,13 @@ public class FolderController {
     private FolderService folderService;
 
     @GetMapping("/all")
-    public List<Folder> getAllFolders() {
-        return folderService.getAllFolders();
+    public List<Folder> getAllFoldersByUserId (@RequestParam("userId") int userId) {
+        return folderService.getAllFoldersByUserId(userId);
+    }
+
+    @GetMapping("/all/byDeck")
+    public List<Folder> getAllFoldersByDeckId(@RequestParam("deckID") int deckID){
+        return folderService.getAllFoldersByDeckId(deckID);
     }
 
     @GetMapping("/{id}")
@@ -32,6 +38,11 @@ public class FolderController {
         folder.setLastViewDate(date);
 
         return folderService.addFolder(folder);
+    }
+
+    @PostMapping("/addDeck")
+    public boolean addDeckToFolder(@RequestBody FolderDeck dto) {
+        return folderService.addDeckToFolder(dto.getFolderID(), dto.getDeckID());
     }
 
     @PutMapping("/{id}")

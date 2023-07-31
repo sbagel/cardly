@@ -19,6 +19,16 @@ public class FolderServiceImpl implements FolderService{
     }
 
     @Override
+    public List<Folder> getAllFoldersByUserId(int UserID) {
+        return folderDao.getAllFoldersByUserId(UserID);
+    }
+
+    @Override
+    public List<Folder> getAllFoldersByDeckId(int deckID) {
+        return folderDao.getAllFoldersByDeckId(deckID);
+    }
+
+    @Override
     public List<Folder> getAllFolders() {
         return folderDao.getAllFolders();
     }
@@ -26,6 +36,11 @@ public class FolderServiceImpl implements FolderService{
     @Override
     public Folder addFolder(Folder folder) {
         return folderDao.addFolder(folder);
+    }
+
+    @Override
+    public boolean addDeckToFolder(int folderID, int deckID) {
+        return folderDao.addDeckToFolder(folderID, deckID);
     }
 
     @Override
