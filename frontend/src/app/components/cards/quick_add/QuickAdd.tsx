@@ -4,6 +4,7 @@ import { FaAngleDown } from 'react-icons/fa';
 import CardForm from "./CardForm";
 import ChooseDeckModal from "../../decks/ChooseDeckModal";
 import useDecksFacade from '../../../facades/useDecksFacade';
+import { Deck } from '../../../../types/DeckTypes';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -45,11 +46,13 @@ const useStyles = createStyles((theme) => ({
   }
 }));
 
-export default function QuickAdd() {
+interface QuickAddProps {
+  currentDeck: Deck
+}
+
+export default function QuickAdd({currentDeck}: QuickAddProps) {
   const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
-
-  const { currentDeck, decks } = useDecksFacade();
 
   const deckName = !currentDeck.title ? "My First Deck" : currentDeck.title.length > 0 ? currentDeck.title : 'Loading';
 

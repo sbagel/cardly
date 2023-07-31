@@ -10,7 +10,7 @@ import useCardsFacade from '../facades/useCardsFacade.ts';
 export default function Add() {
   const navigate = useNavigate();
   const { user, checkStorage } = useUsersFacade();
-  const { currentDeck, decks, fetchDecks } = useDecksFacade();
+  const { currentDeck, fetchDecks } = useDecksFacade();
   const { fetchCards } = useCardsFacade();
 
   useEffect(()=>{
@@ -28,7 +28,7 @@ export default function Add() {
 
   return (
     <>
-      <QuickAdd/>
+      <QuickAdd currentDeck={currentDeck}/>
       <RecentlyAddedCards deck={currentDeck}/>
     </>
   )
