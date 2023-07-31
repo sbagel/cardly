@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
 export default function ToggleHeader() {
   const location = useLocation();
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/decks/public' ? 2 : 0);
+  const [active, setActive] = useState(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/folders' ? 2 : 0);
 
   useEffect(() => {
     setActive(location.pathname == '/add' ? 0 : location.pathname == '/decks' ? 1 : location.pathname == '/folders' ? 2 : 0)
