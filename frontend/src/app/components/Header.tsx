@@ -121,8 +121,8 @@ export default function DoubleHeader() {
           <div className={classes.links}>
             <Group spacing={0} position="right" className={classes.mainLinks}>
               <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
-              <ItemTemplate icon={<FaLightbulb/>} url="/session" label="session"/>
-              <ItemTemplate icon={<FaBell/>} url="/notifications" label="notifications"/>
+              <ItemTemplate icon={<FaLightbulb/>} url="#" label="session"/>
+              <ItemTemplate icon={<FaBell/>} url="#" label="notifications"/>
               <Menu transitionProps={{ transition: 'pop' }} offset={0}>
                 <Menu.Target>
                 <div className={classes.mainLink}><FaUser/></div>
