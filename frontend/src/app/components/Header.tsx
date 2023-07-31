@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import { createStyles, keyframes, Header, Container, Group, Burger, rem, Menu } from '@mantine/core';
+import { createStyles, keyframes, Header, Container, Group, Burger, Text, rem, Menu } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { FaPlus, FaLightbulb, FaBell, FaUser } from 'react-icons/fa';
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { FiSettings } from "react-icons/fi";
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import useUsersFacade from '../facades/useUsersFacade';
 import ToggleHeader from './ToggleHeader';
@@ -124,27 +126,22 @@ export default function DoubleHeader() {
               <ItemTemplate icon={<FaPlus/>} url="/add" label="add"/>
               <ItemTemplate icon={<FaLightbulb/>} url="#" label="session"/>
               <ItemTemplate icon={<FaBell/>} url="#" label="notifications"/>
-              <Menu transitionProps={{ transition: 'pop' }} offset={0}>
+              <Menu transitionProps={{ transition: 'pop' }} offset={4} withArrow>
                 <Menu.Target>
-                <div className={classes.mainLink}><FaUser/></div>
+                    <div className={classes.mainLink}><FaUser/></div>
                 </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Item onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
+                <Menu.Dropdown p='md'>
+                  {/* username */}
+                  <Text fz={rem(24)} fw={700} pl='sm'>{user.username}</Text>
+                  <Menu.Divider />
+                  <Menu.Item icon={<FiSettings/>} fz={rem(16)} w={rem(250)} onClick={() => {}}>Settings</Menu.Item>
+                  <Menu.Item icon={<RiLogoutBoxRLine/>} fz={rem(16)} w={rem(250)} onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
 
                   {/* <Menu.Divider /> */}
                 </Menu.Dropdown>
               </Menu>
             </Group>
 
-              {/* {!user && (
-                <Group spacing={0} position="right" className={classes.mainLinks}>
-                  <Link to="/login" className={classes.unknownUser}>Log in</Link>
-                  <Link to="/" className={classes.unknownUser} style={{'backgroundColor': '#F0F073', 'border': `${rem(3)} solid black`}}>
-                    Get started
-                  </Link>
-                </Group>
-              )
-              } */}
           </div>
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
         </Container>
