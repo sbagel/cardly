@@ -54,11 +54,12 @@ const useStyles = createStyles((theme) => ({
 interface LoginOrSignupModalProps {
   opened: boolean;
   close: () => void;
+  active: string;
+  setActive: (name: string) => void;
 }
 
-export default function LoginOrSignupModal({opened, close}: LoginOrSignupModalProps) {
+export default function LoginOrSignupModal({opened, close, active, setActive }: LoginOrSignupModalProps) {
   const { classes, cx } = useStyles();
-  const [ activeLink, setActiveLink ] = useState('login');
 
   return (
     <Modal.Root
@@ -80,12 +81,12 @@ export default function LoginOrSignupModal({opened, close}: LoginOrSignupModalPr
           {/* toggle between sign up or log in */}
           <div className={classes.toggleContentContainer}>
             <Group spacing={rem(40)}>
-              <div onClick={()=>setActiveLink('signup')} className={cx(classes.toggleLink, { [classes.toggleLinkActive]: activeLink === 'signup' })}>Sign up</div>
-              <div onClick={()=>setActiveLink('login')} className={cx(classes.toggleLink, { [classes.toggleLinkActive]: activeLink === 'login' })}>Log in</div>
+              <div onClick={()=>setActive('signup')} className={cx(classes.toggleLink, { [classes.toggleLinkActive]: active === 'signup' })}>Sign up</div>
+              <div onClick={()=>setActive('login')} className={cx(classes.toggleLink, { [classes.toggleLinkActive]: active === 'login' })}>Log in</div>
             </Group>
           </div>
           {/* log in or signup form */}
-          {activeLink === 'login' ? <LoginForm/> : <SignUpForm/>}
+          {active === 'login' ? <LoginForm/> : <SignUpForm/>}
         </div>
        </div>
       </Modal.Body>

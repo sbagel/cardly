@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { createStyles, Header, Container, Group, rem } from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
 import {  Link } from 'react-router-dom';
@@ -43,6 +44,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     padding: `${rem(7)} ${theme.spacing.sm}`,
     marginRight: 30,
+    cursor: 'pointer'
   },
 
   unknownUserLink: {
@@ -57,9 +59,15 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function LoginHeader() {
+  const [active, setActive] = useState<string>('')
   const [opened, { open, close }] = useDisclosure(false);
   const { classes } = useStyles();
   const { hovered, ref } = useHover();
+
+  const handleClick = (name:string) => {
+    setActive(name);
+    open();
+  }
 
   return (
     <>
@@ -68,17 +76,19 @@ export default function LoginHeader() {
           <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
           <div className={classes.links}>
             <Group spacing={0} position="right" className={classes.mainLinks}>
-                <div className={classes.unknownUser} onClick={open}>
+              {/* log in */}
+                <div className={classes.unknownUser} onClick={() => handleClick('login')}>
                   <span className={classes.unknownUserLink}>Log in</span>
                 </div>
+              {/* sign up */}
                 <div ref={ref} className={classes.unknownUser} style={{'backgroundColor': hovered? '#e9e930' : '#F0F073', 'border': `${rem(3)} solid black`, 'transform': hovered? 'scale(1.01)' : 'scale(1)', 'transition': 'background-color 100ms ease, transform 100ms ease'}}>
-                  <Link to="/" style={{'color':'black'}}>Get started </Link>
+                  <div onClick={() => handleClick('signup')} style={{'color':'black'}}>Get started </div>
                 </div>
               </Group>
           </div>
       </Container>
     </Header>
-    <LoginOrSignupModal opened={opened} close={close}/>
+    <LoginOrSignupModal opened={opened} close={close} active={active} setActive={setActive}/>
     </>
   )
 }
