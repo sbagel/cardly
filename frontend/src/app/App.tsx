@@ -2,14 +2,13 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } 
 import { MantineProvider } from '@mantine/core';
 // import { useColorScheme } from '@mantine/hooks';
 import Home from './pages/Home.tsx';
-import Test from "./pages/Test";
 import Add from "./pages/Add";
 import UserFolders from './pages/UserFolders.tsx';
 import SelectedFolder from './pages/SelectedFolder.tsx';
 import UserDecks from './pages/UserDecks';
 import SelectedDeck from './pages/SelectedDeck.tsx';
 import NotFound from "./pages/NotFound";
-import Header from './components/Header.tsx'
+import Header from './components/Header.tsx';
 
 import './index.css';
 
@@ -17,7 +16,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Header/>}>
       <Route index element={<Home />} />
-      <Route path="test" element={<Test />} />
       <Route path="add" element={<Add />} />
       <Route path="decks" element={<UserDecks />} />
       <Route path="decks/:deckId" element={<SelectedDeck />} />

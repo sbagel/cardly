@@ -10,7 +10,8 @@ import MoveDeckModal from "./MoveDeckModal.tsx";
 
 interface DeckProps {
   deck: Deck,
-  index: number
+  index: number,
+  deckNum: number
 }
 
 const useStyles = createStyles((theme) => ({
@@ -56,7 +57,6 @@ const useStyles = createStyles((theme) => ({
     padding: theme.spacing.md,
     fontSize: rem(20),
     fontWeight: 600,
-    textTransform: 'capitalize'
   },
   ellipsisContainer:{
     position: 'absolute',
@@ -79,7 +79,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function Deck({deck, index}: DeckProps) {
+export default function Deck({deck, deckNum, index}: DeckProps) {
   const navigate = useNavigate();
 
   const { classes } = useStyles();
@@ -90,9 +90,9 @@ export default function Deck({deck, index}: DeckProps) {
   const [openedEditModal, editHandler] = useDisclosure(false);
   const [openedMoveModal, moveHandler] = useDisclosure(false);
 
-  const colors = ['#e8e7fc', '#e7f8fc'];
+  const colors = ['#e8e7fc', '#e7f8fc', '#D8CC61', '#AFBEB6', '#748D83','#D2A39D', '#F7EBAC', '#  ', '#e8e7fc'];
 
-  const color = deck.title === 'Loading....' ? 'lightgray' : colors[index%2]
+  const color = deck.title === 'Loading....' ? 'lightgray' : colors[(deckNum-index)%7]
 
   return (
     <div className={classes.inner} ref={ref}>

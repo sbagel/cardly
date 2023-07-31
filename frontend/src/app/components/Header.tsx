@@ -7,6 +7,7 @@ import { FiSettings } from "react-icons/fi";
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import useUsersFacade from '../facades/useUsersFacade';
 import ToggleHeader from './ToggleHeader';
+import SettingModal from './user/SettingsModal';
 
 const HEADER_HEIGHT = rem(84);
 
@@ -109,6 +110,7 @@ export default function DoubleHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   const [opened, { toggle }] = useDisclosure(false);
+  const [openedSettingModal, settingHandler] = useDisclosure(false);
   const { classes } = useStyles();
 
   const queryParams = new URLSearchParams(location.search);
@@ -134,7 +136,7 @@ export default function DoubleHeader() {
                   {/* username */}
                   <Text fz={rem(24)} fw={700} pl='sm'>{user.username}</Text>
                   <Menu.Divider />
-                  <Menu.Item icon={<FiSettings/>} fz={rem(16)} w={rem(250)} onClick={() => {}}>Settings</Menu.Item>
+                  <Menu.Item icon={<FiSettings/>} fz={rem(16)} w={rem(250)} onClick={settingHandler.open}>Settings</Menu.Item>
                   <Menu.Item icon={<RiLogoutBoxRLine/>} fz={rem(16)} w={rem(250)} onClick={() => {logout(); navigate('/')}}>Log out</Menu.Item>
 
                   {/* <Menu.Divider /> */}
@@ -149,6 +151,7 @@ export default function DoubleHeader() {
       )}
       {!deckName && !folderName && user && <ToggleHeader/>}
       <Outlet/>
+      <SettingModal opened={openedSettingModal} close={settingHandler.close}/>
     </>
   );
 }

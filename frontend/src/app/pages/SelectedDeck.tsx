@@ -109,7 +109,7 @@ export default function SelectedDeck() {
                   />
         </Box>
       </div>
-      <Text fz={rem(40)} fw={700} sx={{textTransform: 'capitalize'}}>{deck.title}</Text>
+      <Text fz={rem(40)} fw={700}>{deck.title}</Text>
       <Group mt={rem(20)} spacing={rem(30)}>
       {
         cards?.length > 0 && (

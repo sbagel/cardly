@@ -42,10 +42,10 @@ export default function DeckByFolder({ deck }: DeckByFolderProps) {
       radius="md"
       className={classes.card}
       onClick={() => navigate(`/decks/${deck.id}?deckName=${deck.title.replace(/\s+/g, "_")}`,{state: {deck: deck, return: 'folders/4?folderName=Test_folder'}})}>
-      <Text size="xl" weight={500} mt="md" sx={{textTransform: 'capitalize'}}>
+      <Text size="xl" weight={500} mt="md">
         {deck.title}
       </Text>
-      <Text size="sm" mt="sm" color="dimmed" sx={{textTransform: 'capitalize'}}>
+      <Text size="sm" mt="sm" color="dimmed">
         {deck.description}
       </Text>
     </Paper>
