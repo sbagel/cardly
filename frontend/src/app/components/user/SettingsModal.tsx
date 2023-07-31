@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createStyles, rem, Modal, Text, PasswordInput, TextInput, Box, Button} from '@mantine/core';
 import { GrClose } from "react-icons/gr";
 import { useForm } from '@mantine/form';
@@ -63,7 +64,12 @@ interface SettingModalProps {
 
 export default function SettingModal({opened, close }: SettingModalProps) {
   const { classes } = useStyles();
-  const { user, updateUser, login } = useUsersFacade();
+  const { checkStorage, user, updateUser, login } = useUsersFacade();
+
+  useEffect(()=>{
+    checkStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   const form = useForm({
     initialValues: { id: user?.id, username: user?.username, name: user?.name, photo: user?.photo, password: '1234'},

@@ -71,7 +71,7 @@ export default function LoginHeader() {
 
   return (
     <>
-    <Header height={HEADER_HEIGHT} mb={20}>
+    <Header height={HEADER_HEIGHT} mb={60}>
       <Container className={classes.inner}>
           <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
           <div className={classes.links}>

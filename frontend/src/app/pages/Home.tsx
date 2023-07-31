@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDebouncedValue } from '@mantine/hooks';
-import LoginHeader from '../components/login/loginHeader';
+import LoginHeader from '../components/login/LoginHeader';
+import HeroContent from '../components/login/HeroContent';
 import useUsersFacade from "../facades/useUsersFacade";
 import useDecksFacade from '../facades/useDecksFacade';
 
@@ -27,7 +28,7 @@ export default function Home() {
     !user &&
     <div>
       <LoginHeader/>
-      home
+      <HeroContent/>
     </div>
   )
 }

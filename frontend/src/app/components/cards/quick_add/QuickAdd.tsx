@@ -53,7 +53,7 @@ export default function QuickAdd({currentDeck}: QuickAddProps) {
   const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
 
-  const deckName = !currentDeck.title ? "My First Deck" : currentDeck.title.length > 0 ? currentDeck.title : 'Loading';
+  const deckName = !currentDeck?.title ? "My First Deck" : currentDeck.title?.length > 0 ? currentDeck.title : 'Loading';
 
   return (
     <Container className={classes.inner} mb={60}>
