@@ -87,7 +87,6 @@ export default function Deck({deck, index}: DeckProps) {
   const [openedDeleteModal, deleteHandler] = useDisclosure(false);
   const [openedEditModal, editHandler] = useDisclosure(false);
 
-
   const colors = ['#e8e7fc', '#e7f8fc'];
 
   const color = deck.title === 'Loading....' ? 'lightgray' : colors[index%2]

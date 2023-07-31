@@ -1,13 +1,17 @@
 
 import { useEffect } from 'react';
+import { useInputState, useDisclosure } from '@mantine/hooks';
 import { useNavigate } from 'react-router-dom';
 
 import { createStyles, Container, NavLink, TextInput, rem, Group, Button} from '@mantine/core';
 
 import useUsersFacade from '../facades/useUsersFacade';
-import useDecksFacade from '../facades/useDecksFacade';
+import useFoldersFacade from '../facades/useFoldersFacade';
 
-import { useInputState, useDisclosure } from '@mantine/hooks';
+import { FaSearch, FaPlus } from 'react-icons/fa';
+
+import Folder from '../components/folders/Folder';
+
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -34,22 +38,12 @@ const useStyles = createStyles((theme) => ({
     }
   },
   itemBox: {
-    width: '50%',
+    width: '80%',
     height: rem(80),
     display: 'flex',
     [theme.fn.smallerThan('md')]: {
       width: '100%',
       height: rem(60),
-    }
-  },
-  sortContainer: {
-    width: rem(150),
-    marginRight: rem(10),
-    height: rem(80),
-    [theme.fn.smallerThan('md')]: {
-      width: '100%',
-      height: rem(20),
-      zIndex: 10
     }
   },
   sortBtn: {
@@ -70,6 +64,9 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
   },
   addBtn: {
+    width: '20%',
+    height: rem(80),
+    display: 'flex',
     [theme.fn.smallerThan('md')]: {
       display: 'none'
     }
@@ -81,7 +78,7 @@ export default function UserFolders() {
 
   const { classes } = useStyles();
   const { user, checkStorage } = useUsersFacade();
-  const { decks, loading, error, fetchDecks } = useDecksFacade();
+  const { folders, loading, error, fetchFolders } = useFoldersFacade();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -92,14 +89,55 @@ export default function UserFolders() {
 
     !user && navigate('/');
 
-    user && fetchDecks(user.id);
+    user && fetchFolders(user.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   return (
-    <div>
-      hi
-    </div>
+    <Container className={classes.inner} mb={60}>
+      {/* search bar */}
+      <Container className={classes.wideContainer}>
+        <div className={classes.deckOrderContainer}>
+          <div className={classes.addBtn}>
+            <Button color="dark" radius="xl" size="md" leftIcon={<FaPlus />} onClick={open}>
+              Add
+            </Button>
+          </div>
+          <div className={classes.itemBox}>
+              <TextInput
+                    placeholder="Search your folders"
+                    icon={<FaSearch size={16} />}
+                    value={query}
+                    variant="unstyled"
+                    onChange={setQuery}
+                    radius="md"
+                    className={classes.searchTextInput}
+                    styles = {{
+                      input: {
+                        fontSize:rem(16)
+                      }
+                    }}
+                  />
+            </div>
+        </div>
+      </Container>
+      {/* display folders */}
+      <Container className={classes.wideContainer}>
+        {
+          folders?.length > 0 && (
+            folders
+            .filter((folder) => {
+              if (query.trim() === '') {
+                return true;
+              }
+              return folder.folderName.toLowerCase().includes(query.toLowerCase())
+            })
+            .map((folder) => (
+              <Folder folder={folder} key={`folder-display-key-${folder.id}`}/>
+            ))
+          )
+        }
+      </Container>
+    </Container>
   )
 }

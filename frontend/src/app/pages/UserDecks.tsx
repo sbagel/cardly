@@ -8,9 +8,8 @@ import useDecksFacade from '../facades/useDecksFacade';
 
 import { useInputState, useDisclosure } from '@mantine/hooks';
 
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaPlus } from 'react-icons/fa';
 import { HiChevronRight } from "react-icons/hi";
-import { FaPlus } from 'react-icons/fa';
 
 import Deck from '../components/decks/Deck';
 import AddDeckModal from '../components/decks/AddDeckModal';
@@ -124,9 +123,9 @@ export default function UserDecks() {
               <NavLink component="div"  label="Created" styles={{root: {backgroundColor: 'white'}, label: {fontWeight: 700, fontSize: rem(16)}}} />
             </NavLink>
           </div>
-          <div className={classes.sortContainer}>
+          {/* <div className={classes.sortContainer}>
             <NavLink component="button" label="No Folder" childrenOffset={0} className={classes.sortBtn} styles={{label: {fontWeight: 700, fontSize: rem(16)}}} rightSection={<HiChevronRight/>} />
-          </div>
+          </div> */}
         </div>
         {/* search bar */}
         <div className={classes.itemBox}>
