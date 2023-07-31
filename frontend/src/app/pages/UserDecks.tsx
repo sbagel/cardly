@@ -160,7 +160,7 @@ export default function UserDecks() {
         {error && <p>{error}</p>}
         <Group spacing="xl">
         {loading &&
-          <Deck deck={loadingDeck} index={0}/>
+          <Deck deckNum={decks.length-1} deck={loadingDeck} index={0}/>
         }
         {
           decks?.length > 0 && (
