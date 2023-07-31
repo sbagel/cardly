@@ -11,17 +11,8 @@ const useStyles = createStyles(() => ({
 }));
 
 export default function RecentlyAddedCards() {
-  const { currentDeck } = useDecksFacade();
-  const { cards, loading, error, fetchCards } = useCardsFacade();
+  const { cards, loading, error } = useCardsFacade();
   const { classes } = useStyles();
-
-  useEffect(() => {
-    if (currentDeck.id) {
-      fetchCards(currentDeck.id)
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentDeck]);
 
   return (
     <Container className={classes.inner} mb={60}>

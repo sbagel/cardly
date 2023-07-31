@@ -3,6 +3,7 @@ import { useForm } from '@mantine/form';
 import { Button, createStyles, Divider, rem, Textarea } from '@mantine/core';
 import useAutosizeTextArea from "../../../../hooks/useAutosizeTextArea";
 import useCardsFacade from "../../../facades/useCardsFacade";
+import useDecksFacade from "../../../facades/useDecksFacade";
 
 const useStyles = createStyles((theme) => ({
   folderBottom: {
@@ -34,11 +35,12 @@ const useStyles = createStyles((theme) => ({
 
 export default function CardForm() {
   const { addCard } = useCardsFacade();
+  const { currentDeck } = useDecksFacade();
 
   const { classes } = useStyles();
 
   const form = useForm({
-    initialValues: { id: 0, deckId: 1, front: '', back: '', favorited: false},
+    initialValues: { id: 0, deckId: currentDeck.id, front: '', back: '', favorited: false},
 
     validate: {
       front: (value) => (value.trim().length < 1 || value.split(" ").length < 2 ? 'Card term must have at least 2 words' : null),
@@ -68,9 +70,19 @@ export default function CardForm() {
     }
   }
 
+  const handleSubmit = () => {
+    addCard({
+      id: 0,
+      deckId: currentDeck.id,
+      front: form.values.front,
+      back: form.values.back,
+      favorited: false
+    });
+  }
+
 
   return (
-    <form onSubmit={form.onSubmit(addCard)} className={classes.folderBottom} onKeyUp={handleEnter}>
+    <form onSubmit={form.onSubmit(handleSubmit)} className={classes.folderBottom} onKeyUp={handleEnter}>
       <Textarea
         autoFocus
         ref={termAreaRef}

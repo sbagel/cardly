@@ -46,8 +46,10 @@ export default function SignUpForm() {
   const handleSubmit = () => {
     addUser(form.values)
       .then(() => {
-        const storedUser = localStorage.getItem("user");
-        addDeck({ id: 0, userID: storedUser ? JSON.parse(storedUser) : 0, title: 'My First Deck', description: '', visible: false})
+        console.log('added user')
+      })
+      .catch((error) => {
+        console.log('added user error', error)
       })
   }
 

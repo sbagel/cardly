@@ -45,10 +45,10 @@ const useUsersStore = create<UsersState>((set) => {
 
         try {
           const firstDeck = {
-             userID: newUser.id,
-             title: 'My First Deck',
-             description: '',
-          }
+            userID: newUser.id,
+            title: 'My First Deck',
+            description: '',
+          };
           await fetch(`http://localhost:8080/api/deck/add`, {
             method: "POST",
             headers: {
@@ -61,6 +61,7 @@ const useUsersStore = create<UsersState>((set) => {
             ...state,
             error: error.message,
           }));
+          return;
         }
       } catch (error) {
         set((state) => ({
