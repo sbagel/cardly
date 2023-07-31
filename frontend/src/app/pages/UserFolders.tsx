@@ -11,7 +11,7 @@ import useFoldersFacade from '../facades/useFoldersFacade';
 import { FaSearch, FaPlus } from 'react-icons/fa';
 
 import Folder from '../components/folders/Folder';
-
+import AddFolderModal from '../components/folders/AddFolderModal';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -95,6 +95,10 @@ export default function UserFolders() {
 
   return (
     <Container className={classes.inner} mb={60}>
+      <AddFolderModal
+        opened={opened}
+        close={close}
+        user={user || {id: 0, username: '', name: '', photo: ''}}/>
       {/* search bar */}
       <Container className={classes.wideContainer}>
         <div className={classes.deckOrderContainer}>

@@ -19,13 +19,13 @@ const useStyles = createStyles(() => ({
   }
 }));
 
-interface DeckModalProps {
+interface DeleteFolderModalProps {
   folderId: number;
   opened: boolean;
   close: () => void;
 }
 
-export default function DeleteDeckModal({folderId, opened, close}: DeckModalProps) {
+export default function DeleteFolderModal({folderId, opened, close}: DeleteFolderModalProps) {
   const { deleteFolder } = useFoldersFacade()
   const { classes } = useStyles();
 
