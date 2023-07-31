@@ -5,6 +5,7 @@ import Home from './pages/Home.tsx';
 import Test from "./pages/Test";
 import Add from "./pages/Add";
 import UserFolders from './pages/UserFolders.tsx';
+import SelectedFolder from './pages/SelectedFolder.tsx';
 import UserDecks from './pages/UserDecks';
 import SelectedDeck from './pages/SelectedDeck.tsx';
 import NotFound from "./pages/NotFound";
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="decks" element={<UserDecks />} />
       <Route path="decks/:deckId" element={<SelectedDeck />} />
       <Route path="folders" element={<UserFolders />} />
+      <Route path="folders/:folderId" element={<SelectedFolder />} />
       <Route path='*' element={<NotFound />}/>
     </Route>
   )
