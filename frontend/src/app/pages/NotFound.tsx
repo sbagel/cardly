@@ -1,14 +1,8 @@
-import { Outlet, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function NotFound() {
-
-  return (
-    <>
-      <div>
-        Error! Go back: <Link to="/">back</Link>
-      </div>
-      <Outlet/>
-    </>
-  )
+  useEffect(() => {
+    location.href = "/";
+  })
 }
 
