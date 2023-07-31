@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useInputState, useHover } from '@mantine/hooks';
+import { useInputState } from '@mantine/hooks';
 import { createStyles, Container, Group, Box, rem, TextInput, Text } from '@mantine/core';
 
 import ReactFlipCard from 'reactjs-flip-card'
@@ -11,7 +11,7 @@ import { FaSearch, FaPlus } from 'react-icons/fa';
 
 import useCardsFacade from '../facades/useCardsFacade.ts';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   inner: {
     display: 'flex',
     flexDirection: 'column',
@@ -47,12 +47,9 @@ export default function SelectedDeck() {
 
   const { cards, fetchCards } = useCardsFacade();
 
-  const flipCardHover = useHover();
-
   const { classes } = useStyles();
 
   const deck = location.state.deck;
-  const url = location.state.return;
 
   const [query, setQuery] = useInputState('');
 
@@ -92,7 +89,7 @@ export default function SelectedDeck() {
   return (
     <Container mt={rem(60)} className={classes.inner}>
       <div className={classes.nav}>
-        <div onClick={()=> navigate(url)} className={classes.arrowContainer}>
+        <div onClick={()=> navigate(-1)} className={classes.arrowContainer}>
           <FaArrowLeftLong size={30}/>
         </div>
         <Box w={'100%'}>
