@@ -105,7 +105,7 @@ export default function Deck({deck, index}: DeckProps) {
       </div>}
       <div
         className={classes.deck}
-        onClick={() => navigate(`/decks/${deck.id}?deckName=${deck.title}`,{state: {deck: deck, return: '/decks'}})}>
+        onClick={() => navigate(`/decks/${deck.id}?deckName=${deck.title.replace(/\s+/g, "_")}`,{state: {deck: deck, return: '/decks'}})}>
         <div className={classes.deckHeaderImg}>
           <div style={{'zoom': '1.12', 'width': '100%'}}>
             <DeathStarPattern width={120} height={160} fill={color} />

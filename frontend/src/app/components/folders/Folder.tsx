@@ -1,5 +1,6 @@
 import { createStyles, rem, NavLink, Paper, Box} from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
+import { useNavigate } from 'react-router-dom';
 
 import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
 import { FcFolder, FcOpenedFolder } from "react-icons/fc";
@@ -36,6 +37,7 @@ interface FolderProps {
 }
 
 export default function Folder({folder}:FolderProps) {
+  const navigate = useNavigate();
   const { classes } = useStyles();
   const folderIconHover = useHover();
   const folderEditHover = useHover();
@@ -44,7 +46,13 @@ export default function Folder({folder}:FolderProps) {
   const [openedEditModal, editHandler] = useDisclosure(false);
 
   return (
-    <Paper shadow="xs" mb={10} sx={{ width: '100%', position: 'relative' }} radius="lg" ref={folderEditHover.ref}>
+    <Paper
+      onClick={() => navigate(`${folder.id}?${folder.folderName.replace(/\s+/g, "_")}`)}
+      shadow="xs"
+      mb={10}
+      sx={{ width: '100%', position: 'relative' }}
+      radius="lg"
+      ref={folderEditHover.ref}>
       <DeleteFolderModal folderId={folder.id} opened={openedDeleteModal} close={deleteHandler.close}/>
       <EditFolderModal folder={folder} opened={openedEditModal} close={editHandler.close}/>
 
