@@ -36,6 +36,7 @@ export default function SignUpForm() {
         value.trim().length < 1 ? 'Username cannot be empty' :
         value.length > 50 ? 'Username cannot be greater than 50 characters' :
         value.split(" ").length > 1 ? 'Username must be one word':
+        !/^[A-Za-z0-9_-]+$/.test(value) ? 'Username can only contain letters, numbers, "-" and "_"':
         null),
     },
   });
