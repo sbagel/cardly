@@ -47,7 +47,7 @@ export default function Folder({folder}:FolderProps) {
 
   return (
     <Paper
-      onClick={() => navigate(`${folder.id}?folderName=${folder.folderName.replace(/\s+/g, "_")}`)}
+      onClick={() => navigate(`${folder.id}?folderName=${folder.folderName.replace(/\s+/g, "_")}`,{state: {folder: folder, return: '/folders'}})}
       shadow="xs"
       mb={10}
       sx={{ width: '100%', position: 'relative' }}

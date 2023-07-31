@@ -5,6 +5,7 @@ import { createStyles, Container, NavLink, TextInput, rem, Group, Button} from '
 
 import useUsersFacade from '../facades/useUsersFacade';
 import useDecksFacade from '../facades/useDecksFacade';
+import useFoldersFacade from '../facades/useFoldersFacade';
 
 import { useInputState, useDisclosure } from '@mantine/hooks';
 
@@ -87,6 +88,7 @@ export default function UserDecks() {
   const { classes } = useStyles();
   const { user, checkStorage } = useUsersFacade();
   const { decks, loading, error, fetchDecks } = useDecksFacade();
+  const { fetchFolders } = useFoldersFacade();
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -98,6 +100,8 @@ export default function UserDecks() {
     !user && navigate('/');
 
     user && fetchDecks(user.id);
+
+    user && fetchFolders(user.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

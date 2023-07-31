@@ -111,10 +111,11 @@ export default function DoubleHeader() {
 
   const queryParams = new URLSearchParams(location.search);
   const deckName = queryParams.get('deckName');
+  const folderName = queryParams.get('folderName');
 
   return (
     <>
-    {user && (
+    {!deckName && !folderName && user && (
       <Header height={HEADER_HEIGHT} mb={20}>
         <Container className={classes.inner}>
           <Link to="/"><h1 className={classes.logo}>Cardly</h1></Link>
@@ -149,7 +150,7 @@ export default function DoubleHeader() {
         </Container>
       </Header>
       )}
-      {!deckName && user && <ToggleHeader/>}
+      {!deckName && !folderName && user && <ToggleHeader/>}
       <Outlet/>
     </>
   );

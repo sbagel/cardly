@@ -2,10 +2,11 @@ import { Deck } from "../../../types/DeckTypes";
 import DeathStarPattern from "../DeathStarPattern.tsx";
 import { createStyles, rem, NavLink} from '@mantine/core';
 import { useHover, useDisclosure } from '@mantine/hooks';
-import { FaEllipsis, FaPenToSquare, FaTrashCan } from "react-icons/fa6";
+import { FaEllipsis, FaPenToSquare, FaTrashCan, FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import DeleteDeckModal from "./DeleteDeckModal.tsx";
 import EditDeckModal from "./EditDeckModal.tsx";
+import MoveDeckModal from "./MoveDeckModal.tsx";
 
 interface DeckProps {
   deck: Deck,
@@ -87,6 +88,7 @@ export default function Deck({deck, index}: DeckProps) {
 
   const [openedDeleteModal, deleteHandler] = useDisclosure(false);
   const [openedEditModal, editHandler] = useDisclosure(false);
+  const [openedMoveModal, moveHandler] = useDisclosure(false);
 
   const colors = ['#e8e7fc', '#e7f8fc'];
 
@@ -96,10 +98,12 @@ export default function Deck({deck, index}: DeckProps) {
     <div className={classes.inner} ref={ref}>
       <DeleteDeckModal deckId={deck.id} title={deck.title} opened={openedDeleteModal} close={deleteHandler.close}/>
       <EditDeckModal deck={deck} opened={openedEditModal} close={editHandler.close}/>
+      <MoveDeckModal deck={deck} opened={openedMoveModal} close={moveHandler.close}/>
       {hovered &&
       <div className={classes.ellipsisContainer}>
         <NavLink component="div" className={classes.ellipsisIcon} childrenOffset={0} rightSection={<FaEllipsis size={20}/>}>
           <NavLink component="div" onClick={editHandler.open} className={classes.editCardLabel} icon={<FaPenToSquare size={15}/>} label="Rename deck" styles={{root: {backgroundColor: 'white'}}}/>
+          <NavLink component="div" onClick={moveHandler.open} className={classes.editCardLabel} icon={<FaArrowRightLong size={15}/>} label="Move deck" styles={{root: {backgroundColor: 'white'}}}/>
           <NavLink component="div" onClick={deleteHandler.open} className={classes.editCardLabel} icon={<FaTrashCan size={15}/>} label="Delete deck"styles={{root: {backgroundColor: 'white', zIndex: 20}}}/>
         </NavLink>
       </div>}

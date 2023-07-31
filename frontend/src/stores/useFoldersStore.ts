@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Folder, FoldersState } from "../types/FolderTypes";
+import { Folder, FolderDeck, FoldersState } from "../types/FolderTypes";
 
 const API_URL = "http://localhost:8080/api/folder";
 
@@ -37,6 +37,32 @@ const useFoldersStore = create<FoldersState>((set) => ({
       });
       const newFolder = await res.json();
       set((state) => ({ ...state, error: "", folders: [newFolder, ...state.folders] }));
+    } catch (error) {
+      set((state) => ({
+        ...state,
+        error: error.message,
+      }));
+    } finally {
+      set((state) => ({
+        ...state,
+        loading: false,
+      }));
+    }
+  },
+  addDeckToFolder: async (folderDeck: FolderDeck) => {
+    set((state) => ({ ...state, loading: true, error: "" }));
+    try {
+      const res = await fetch(`${API_URL}/addDeck`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(folderDeck),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to add deck to folder.");
+      }
     } catch (error) {
       set((state) => ({
         ...state,
